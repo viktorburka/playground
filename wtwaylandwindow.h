@@ -3,14 +3,21 @@
 
 #include <wayland-client.h>
 
+class CtTempFile;
+
 class WtWaylandWindow
 {
 public:
-	WtWaylandWindow();
+    WtWaylandWindow(int width, int height);
 	~WtWaylandWindow();
 
+    wl_display* display() const;
+
+    static int windowWidth;
+    static int windowHeight;
+
 private:
-	wl_display * display;
+    CtTempFile * m_mappedFile;
 };
 
 #endif

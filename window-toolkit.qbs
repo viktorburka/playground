@@ -2,7 +2,15 @@ import qbs
 
 CppApplication {
     consoleApplication: true
-    files: ["main.cpp", "wtwaylandwindow.cpp", "wtwaylandwindow.h"]
+    files: [
+        "cttempfile.cpp",
+        "cttempfile.h",
+        "main.cpp",
+        "wteventloop.cpp",
+        "wteventloop.h",
+        "wtwaylandwindow.cpp",
+        "wtwaylandwindow.h",
+    ]
     cpp.dynamicLibraries: "wayland-client"
 
     Group {     // Properties for the produced executable
