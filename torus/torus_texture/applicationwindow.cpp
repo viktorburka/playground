@@ -58,8 +58,8 @@ void ApplicationWindow::initializeGL()
 
     const float outerRadius = 1.0f;
     const float innerRadius = 0.2f;
-    const float phiIncrement = 20.0f;
-    const float tauIncrement = 30.0f;
+    const float phiIncrement = 5.0f;
+    const float tauIncrement = 5.0f;
     const int coordinatesNumber = 3;
 
     float phi = 0.0;
@@ -102,15 +102,16 @@ void ApplicationWindow::initializeGL()
         0.0f, 1.0f
     };
 
+    // green
+    GLuint texture[] = {
+        0xFF00AA00, 0xFF00AA00,
+        0xFF00AA00, 0xFF00AA00
+    };
+
     glGenBuffers(1, &m_textureBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_textureBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(textureCoordinates),
                  textureCoordinates, GL_DYNAMIC_DRAW);
-
-    GLuint texture[] = {
-        0x00FF00FF, 0x00FF00FF,
-        0x00FF00FF, 0x00FF00FF
-    };
 
     glGenTextures(1, &m_textureId);
     glBindTexture(GL_TEXTURE_2D, m_textureId);
@@ -124,7 +125,7 @@ void ApplicationWindow::initializeGL()
 void ApplicationWindow::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glUseProgram(shaderProgram->programId());
 
@@ -140,11 +141,19 @@ void ApplicationWindow::paintGL()
     GLint posAttrib = shaderProgram->getAttribLocation("position");
     glEnableVertexAttribArray(posAttrib);
 
+    GLint texAttrib = shaderProgram->getAttribLocation("texcoord");
+    glEnableVertexAttribArray(texAttrib);
+
     glBindBuffer(GL_ARRAY_BUFFER, m_vertices);
     glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
+    glBindBuffer(GL_ARRAY_BUFFER, m_textureBuffer);
+    glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glBindTexture(GL_TEXTURE_2D, m_textureId);
+
     glBindFragDataLocation(shaderProgram->programId(), 0, "outColor");
-    //glDrawArrays(GL_POINTS, 0, m_verticesNumber);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, m_verticesNumber);
 }
 
