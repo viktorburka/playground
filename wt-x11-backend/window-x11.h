@@ -13,10 +13,17 @@ public:
 
     void eventX11(XEvent * event);
 
+protected:
+    virtual void exposeEvent();
+
 private:
-    Window m_win;
-    int m_width, m_height;
-    int m_xpos, m_ypos;
+    void drawBackground();
+    void drawBackground(int x, int y, int width, int height);
+
+    Window  m_win;
+    GC      m_gc;
+    int     m_width, m_height;
+    int     m_xpos, m_ypos;
 };
 
 #endif

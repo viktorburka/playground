@@ -9,5 +9,7 @@ add_executable(wt-x11-driver
                display-x11.cpp
                display-x11.h
                application-x11.cpp
-               application-x11.h)
+               application-x11.h
+               paintbrush.cpp
+               paintbrush.h)
 target_link_libraries(wt-x11-driver X11)

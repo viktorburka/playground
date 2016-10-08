@@ -14,7 +14,7 @@ ApplicationX11::ApplicationX11()
         exit(-1);
     }
 
-    DisplayX11::display = XOpenDisplay(":0"); //TO-DO: read DISPLAY env variable
+    DisplayX11::display = XOpenDisplay(NULL); //TO-DO: read DISPLAY env variable
     if (DisplayX11::display == NULL) {
         fprintf(stderr, "Cannot connect to X server %s\n", ":0");
         exit(-1);
@@ -45,12 +45,6 @@ void ApplicationX11::run()
             fprintf(stderr, "Unknown window %u\n", (uint)(event.xany.window));
             exit(-1);
         }
-//        switch (event.type) {
-//        case Expose:
-//            break;
-//        default:
-//            break;
-//        }
     }
 }
 
