@@ -13,6 +13,7 @@ public:
     PaintBrush(WindowX11 * win);
 
     void drawRect(int x, int y, int width, int height);
+    void fillRect(int x, int y, int width, int height);
     void setOutlineColor(const std::string & colorName);
 
 private:

@@ -11,5 +11,7 @@ add_executable(wt-x11-driver
                application-x11.cpp
                application-x11.h
                paintbrush.cpp
-               paintbrush.h)
+               paintbrush.h
+               wt-x11-driver.cpp
+               wt-x11-driver.h)
 target_link_libraries(wt-x11-driver X11)

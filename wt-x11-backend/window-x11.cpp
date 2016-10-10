@@ -34,7 +34,6 @@ void WindowX11::show()
 {
     Display* display = DisplayX11::display;
     XMapWindow(display, m_win);
-    XFlush(display);
 }
 
 Window WindowX11::id() const
@@ -51,8 +50,9 @@ void WindowX11::eventX11(XEvent *event)
     case Expose: {
         XExposeEvent ee = event->xexpose;
         if (ee.count == 0) { // ignoring queued up expose events
-            drawBackground(ee.x, ee.y, ee.width, ee.height);
             exposeEvent();
+            drawBackground(ee.x, ee.y, ee.width, ee.height);
+            drawEvent(ee.x, ee.y, ee.width, ee.height);
         }
         break;
     }
@@ -61,22 +61,9 @@ void WindowX11::eventX11(XEvent *event)
     }
 }
 
-void WindowX11::exposeEvent()
-{
-
-}
-
-void WindowX11::drawBackground()
-{
-    Display* display = DisplayX11::display;
-    XSetFillStyle(display, m_gc, FillSolid);
-    XFillRectangle(display, m_win, m_gc, 0, 0, m_width, m_height);
-    fprintf(stderr, "Draw background\n");
-}
-
 void WindowX11::drawBackground(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
-    pb.setOutlineColor("Red");
-    pb.drawRect(x, y, width, height);
+    pb.setOutlineColor("LightGrey");
+    pb.fillRect(x, y, width, height);
 }

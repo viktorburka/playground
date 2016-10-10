@@ -21,8 +21,13 @@ PaintBrush::PaintBrush(WindowX11 *win)
 void PaintBrush::drawRect(int x, int y, int width, int height)
 {
     Display* display = DisplayX11::display;
-    //XFillRectangle(display, m_surface->id(), m_gc, x, y, width, height);
     XDrawRectangle(display, m_surface->id(), m_gc, x, y, width, height);
+}
+
+void PaintBrush::fillRect(int x, int y, int width, int height)
+{
+    Display* display = DisplayX11::display;
+    XFillRectangle(display, m_surface->id(), m_gc, x, y, width, height);
 }
 
 void PaintBrush::setOutlineColor(const std::string & colorName)
