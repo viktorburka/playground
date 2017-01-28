@@ -17,6 +17,11 @@ public:
     void addWindow(WindowX11 * win);
 
 private:
+    void leaveEventLoop();
+
+    bool                        m_running;
     std::map<Window,WindowX11*> m_windows;
-    static ApplicationX11* m_instance;
+    static ApplicationX11*      m_instance;
+
+    friend class WindowX11;
 };

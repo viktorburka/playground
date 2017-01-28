@@ -6,7 +6,11 @@
 class DisplayX11
 {
 public:
+    static Display* currentDisplay();
+    static GC currentGC();
+    
     static Display* display;
+    static GC gc;
 };
 
 #endif

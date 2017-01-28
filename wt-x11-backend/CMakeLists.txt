@@ -5,6 +5,7 @@ add_executable(wt-x11-driver
                main.cpp
                window-x11.cpp
                window-x11.h
+               verification.cpp
                verification.h
                display-x11.cpp
                display-x11.h

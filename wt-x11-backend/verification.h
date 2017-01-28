@@ -1,11 +1,11 @@
+#ifndef VERIFICAITON_H
+#define VERIFICAITON_H
+
 #include <X11/Xlib.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void check_display_x11(Display * display)
-{
-    if (display == NULL) {
-        fprintf(stderr, "X11 display is not initialized. Create ApplicationX11 instance first\n");
-        exit(-1);
-    }
-}
+void check_display_x11(Display * display);
+void check_gc_x11(GC gc);
+
+#endif

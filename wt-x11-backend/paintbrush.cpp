@@ -11,10 +11,7 @@ PaintBrush::PaintBrush(WindowX11 *win)
 //    values.foreground = WhitePixel(display, DefaultScreen(display));
 //    values.line_width = 1;
 //    values.line_style = LineSolid;
-    m_gc = XCreateGC(display, win->id(),
-                     //GCForeground|GCLineWidth|GCLineStyle,
-                     0,
-                     /*&values*/NULL);
+    m_gc = DisplayX11::currentGC();
     XSetFillStyle(display, m_gc, FillSolid);
 }
 

@@ -8,6 +8,7 @@
 ApplicationX11* ApplicationX11::m_instance = 0;
 
 ApplicationX11::ApplicationX11()
+    : m_running(false)
 {
     if (m_instance) {
         fprintf(stderr, "There can not be more than one instance of Application");
@@ -35,7 +36,9 @@ void ApplicationX11::run()
 {
     XEvent event;
 
-    while (1) {
+    m_running = true;
+
+    while (m_running) {
         XNextEvent(DisplayX11::display, &event);
         fprintf(stderr, "Event received\n");
         auto it = m_windows.find(event.xany.window);
@@ -56,4 +59,9 @@ ApplicationX11* ApplicationX11::instance()
 void ApplicationX11::addWindow(WindowX11 *win)
 {
     m_windows[win->id()] = win;
+}
+
+void ApplicationX11::leaveEventLoop()
+{
+    m_running = false;
 }
