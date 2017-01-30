@@ -5,20 +5,25 @@
 
 #include <string>
 
+namespace Wt {
+
+class Widget;
 class WindowX11;
 
 class PaintBrush
 {
 public:
-    PaintBrush(WindowX11 * win);
+    PaintBrush(Widget * widget);
 
     void drawRect(int x, int y, int width, int height);
     void fillRect(int x, int y, int width, int height);
     void setOutlineColor(const std::string & colorName);
 
 private:
-    WindowX11* m_surface;
-    GC m_gc;
+    Widget* m_surface;
+    GC      m_gc;
 };
+
+}
 
 #endif

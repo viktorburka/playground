@@ -1,9 +1,12 @@
 #include "paintbrush.h"
 #include "window-x11.h"
 #include "display-x11.h"
+#include "widget.h"
 
-PaintBrush::PaintBrush(WindowX11 *win)
-    : m_surface(win)
+using namespace Wt;
+
+PaintBrush::PaintBrush(Widget* widget)
+    : m_surface(widget)
 {
     Display* display = DisplayX11::display;
 

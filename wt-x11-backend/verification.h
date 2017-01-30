@@ -7,5 +7,6 @@
 
 void check_display_x11(Display * display);
 void check_gc_x11(GC gc);
+void check_null_ptr(void* ptr);
 
 #endif

@@ -1,9 +1,11 @@
 #ifndef WTX11DRIVER_H
 #define WTX11DRIVER_H
 
-#include "window-x11.h"
+#include "widget.h"
 
-class WtX11DriverWindow: public WindowX11
+using namespace Wt;
+
+class WtX11DriverWindow: public Widget
 {
 public:
     WtX11DriverWindow(int width, int height);

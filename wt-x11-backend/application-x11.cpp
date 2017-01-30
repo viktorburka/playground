@@ -4,6 +4,10 @@
 #include "application-x11.h"
 #include "display-x11.h"
 #include "window-x11.h"
+#include "verification.h"
+#include "widget.h"
+
+using namespace Wt;
 
 ApplicationX11* ApplicationX11::m_instance = 0;
 
@@ -22,6 +26,8 @@ ApplicationX11::ApplicationX11()
     } else {
         fprintf(stderr, "Connected to X server %s !\n", ":0");
     }
+
+    DisplayX11::initWindowManager(DisplayX11::display);
 
     m_instance = this;
 }
@@ -43,7 +49,8 @@ void ApplicationX11::run()
         fprintf(stderr, "Event received\n");
         auto it = m_windows.find(event.xany.window);
         if (it != m_windows.end()) {
-            it->second->eventX11(&event);
+            //it->second->eventX11(&event);
+            processEvent(&event, it->second);
         } else {
             fprintf(stderr, "Unknown window %u\n", (uint)(event.xany.window));
             exit(-1);
@@ -56,12 +63,38 @@ ApplicationX11* ApplicationX11::instance()
     return m_instance;
 }
 
-void ApplicationX11::addWindow(WindowX11 *win)
+void ApplicationX11::addWindow(Widget* widget)
 {
-    m_windows[win->id()] = win;
+    m_windows[widget->id()] = widget;
 }
 
 void ApplicationX11::leaveEventLoop()
 {
     m_running = false;
+}
+
+void ApplicationX11::processEvent(XEvent* event, Widget* widget)
+{
+    fprintf(stderr, "Event: %d\n", event->type);
+
+    switch (event->xany.type) {
+    case Expose: {
+        XExposeEvent ee = event->xexpose;
+        if (ee.count == 0) { // ignoring queued up expose events
+            widget->exposeEvent();
+            widget->drawBackground(ee.x, ee.y, ee.width, ee.height);
+            widget->drawEvent(ee.x, ee.y, ee.width, ee.height);
+        }
+        break;
+    }
+    case ClientMessage: {
+        if (event->xclient.data.l[0] == DisplayX11::closeWinMsg) {
+            widget->closeEvent();
+            leaveEventLoop();
+        }
+        break;
+    }
+    default:
+        break;
+    }
 }

@@ -3,6 +3,8 @@ project (wt-x11-driver)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_executable(wt-x11-driver
                main.cpp
+#               window.cpp
+               window.h
                window-x11.cpp
                window-x11.h
                verification.cpp
@@ -14,5 +16,11 @@ add_executable(wt-x11-driver
                paintbrush.cpp
                paintbrush.h
                wt-x11-driver.cpp
-               wt-x11-driver.h)
+               wt-x11-driver.h
+               pushbutton.cpp
+               pushbutton.h
+               widget.cpp
+               widget.h
+               types.h)
 target_link_libraries(wt-x11-driver X11)
+add_definitions(-DGP_X11)

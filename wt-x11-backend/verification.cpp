@@ -15,3 +15,9 @@ void check_gc_x11(GC gc)
         exit(-1);
     }
 }
+
+void check_null_ptr(void* ptr)
+{
+    if (ptr == nullptr)
+        abort();
+}

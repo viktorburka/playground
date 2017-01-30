@@ -1,19 +1,22 @@
 #ifndef WINDOWX11_H
 #define WINDOWX11_H
 
+#include "window.h"
+#include "application-x11.h"
+
 #include <X11/Xlib.h>
 
-class WindowX11
+namespace Wt {
+
+class WindowX11: public Window
 {
 public:
     WindowX11(WindowX11* parent);
     WindowX11(int width, int height);
 
     void show();
-    Window id() const;
+    WindowId id() const;
     bool isTopLevel() const;
-
-    void eventX11(XEvent * event);
 
 protected:
     virtual void exposeEvent() {}
@@ -21,14 +24,18 @@ protected:
     virtual void closeEvent() {}
 
 private:
-    void drawBackground(int x, int y, int width, int height);
-    Window nativeWindowId() const;
+    //void drawBackground(int x, int y, int width, int height);
+    //void eventX11(XEvent * event);
 
-    Window  m_win;
+    WindowId  m_win;
     int     m_width, m_height;
     int     m_xpos, m_ypos;
     bool    m_topLevel;
-    Atom    m_closeWinMsg;
+    //Atom    m_closeWinMsg;
+
+    friend class ApplicationX11;
 };
+
+}
 
 #endif

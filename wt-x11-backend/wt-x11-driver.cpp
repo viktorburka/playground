@@ -2,7 +2,7 @@
 #include "paintbrush.h"
 
 WtX11DriverWindow::WtX11DriverWindow(int width, int height)
-    : WindowX11(width, height)
+    : Widget(width, height)
 {
 
 }

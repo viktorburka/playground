@@ -1,6 +1,8 @@
 #include "application-x11.h"
 #include "wt-x11-driver.h"
 
+using namespace Wt;
+
 int main(int argc, char * argv[])
 {
     ApplicationX11 application;

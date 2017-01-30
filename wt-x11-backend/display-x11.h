@@ -3,14 +3,20 @@
 
 #include <X11/Xlib.h>
 
+namespace Wt {
+
 class DisplayX11
 {
 public:
     static Display* currentDisplay();
     static GC currentGC();
+    static void initWindowManager(Display* display);
     
     static Display* display;
     static GC gc;
+    static Atom closeWinMsg;
 };
+
+}
 
 #endif
