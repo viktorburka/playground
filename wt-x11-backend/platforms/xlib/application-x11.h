@@ -2,6 +2,7 @@
 #define APPLICATIONX11_H
 
 #include "types.h"
+#include "platformapplication.h"
 
 #include <X11/Xlib.h>
 
@@ -9,11 +10,9 @@
 
 namespace Wt {
 
-class WindowX11;
-class Window;
 class Widget;
 
-class ApplicationX11
+class ApplicationX11: public PlatformApplication
 {
 public:
     ApplicationX11();
@@ -21,7 +20,7 @@ public:
 
     void run();
 
-    static ApplicationX11* instance();
+    //static ApplicationX11* instance();
 
     void addWindow(Widget* widget);
 
@@ -31,9 +30,7 @@ private:
 
     bool                       m_running;
     std::map<WindowId,Widget*> m_windows;
-    static ApplicationX11*     m_instance;
-
-    //friend class WindowX11;
+    //static ApplicationX11*     m_instance;
 };
 
 }

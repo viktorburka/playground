@@ -2,11 +2,10 @@
 #define WINDOWX11_H
 
 #include "window.h"
-#include "application-x11.h"
-
-#include <X11/Xlib.h>
 
 namespace Wt {
+
+class ApplicationX11;
 
 class WindowX11: public Window
 {
@@ -24,14 +23,10 @@ protected:
     virtual void closeEvent() {}
 
 private:
-    //void drawBackground(int x, int y, int width, int height);
-    //void eventX11(XEvent * event);
-
-    WindowId  m_win;
-    int     m_width, m_height;
-    int     m_xpos, m_ypos;
-    bool    m_topLevel;
-    //Atom    m_closeWinMsg;
+    WindowId m_win;
+    int      m_width, m_height;
+    int      m_xpos, m_ypos;
+    bool     m_topLevel;
 
     friend class ApplicationX11;
 };

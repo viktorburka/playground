@@ -13,7 +13,7 @@ class WindowX11;
 class PaintBrush
 {
 public:
-    PaintBrush(Widget * widget);
+    PaintBrush(Widget* widget);
 
     void drawRect(int x, int y, int width, int height);
     void fillRect(int x, int y, int width, int height);

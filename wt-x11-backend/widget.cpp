@@ -1,5 +1,5 @@
 #include "widget.h"
-#include "application-x11.h"
+#include "application.h"
 #include "verification.h"
 #include "paintbrush.h"
 
@@ -16,7 +16,7 @@ Widget::Widget(Widget* parent)
     check_null_ptr(x11win);
     m_platformWin = new WindowX11(x11win);
 #endif
-    ApplicationX11::instance()->addWindow(this);
+    Application::instance()->addWindow(this);
 }
 
 Widget::Widget(int width, int height)
@@ -24,7 +24,7 @@ Widget::Widget(int width, int height)
 #ifdef GP_X11
     m_platformWin = new WindowX11(width, height);
 #endif
-    ApplicationX11::instance()->addWindow(this);
+    Application::instance()->addWindow(this);
 }
 
 void Widget::show()
@@ -48,23 +48,3 @@ void Widget::drawBackground(int x, int y, int width, int height)
     pb.setOutlineColor("LightGrey");
     pb.fillRect(x, y, width, height);
 }
-
-//void Widget::event(Event* event)
-//{
-
-//}
-
-//void Widget::exposeEvent()
-//{
-
-//}
-
-//void Widget::drawEvent(int x, int y, int width, int height)
-//{
-
-//}
-
-//void Widget::closeEvent()
-//{
-
-//}

@@ -1,11 +1,11 @@
-#include "application-x11.h"
+#include "application.h"
 #include "wt-x11-driver.h"
 
 using namespace Wt;
 
 int main(int argc, char * argv[])
 {
-    ApplicationX11 application;
+    Application application;
     WtX11DriverWindow window(800,600);
     window.show();
     application.run();

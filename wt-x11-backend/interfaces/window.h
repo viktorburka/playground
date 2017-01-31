@@ -14,8 +14,6 @@ public:
     virtual WindowId id() const { return (WindowId)0; }
     virtual bool isTopLevel() const { return false; }
 
-    //virtual void event(Event * event) {}
-
 protected:
     virtual void exposeEvent() {}
     virtual void drawEvent(int x, int y, int width, int height) {}

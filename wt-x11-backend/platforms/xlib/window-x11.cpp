@@ -1,8 +1,6 @@
+#include "window-x11.h"
 #include "display-x11.h"
 #include "verification.h"
-#include "application-x11.h"
-#include "paintbrush.h"
-#include "window-x11.h"
 
 using namespace Wt;
 
@@ -39,7 +37,6 @@ WindowX11::WindowX11(int width, int height)
     , m_xpos(0)
     , m_ypos(0)
     , m_topLevel(true)
-    //, m_closeWinMsg(0)
 {
     Display* display = DisplayX11::currentDisplay();
 
@@ -76,37 +73,3 @@ bool WindowX11::isTopLevel() const
 {
     return m_topLevel;
 }
-
-//void WindowX11::drawBackground(int x, int y, int width, int height)
-//{
-//    PaintBrush pb(this);
-//    pb.setOutlineColor("LightGrey");
-//    pb.fillRect(x, y, width, height);
-//}
-
-//void WindowX11::eventX11(XEvent *event)
-//{
-//    (void)event;
-//    fprintf(stderr, "Event: %d\n", event->type);
-
-//    switch (event->xany.type) {
-//    case Expose: {
-//        XExposeEvent ee = event->xexpose;
-//        if (ee.count == 0) { // ignoring queued up expose events
-//            exposeEvent();
-//            drawBackground(ee.x, ee.y, ee.width, ee.height);
-//            drawEvent(ee.x, ee.y, ee.width, ee.height);
-//        }
-//        break;
-//    }
-//    case ClientMessage: {
-//        if (event->xclient.data.l[0] == m_closeWinMsg) {
-//            closeEvent();
-//            ApplicationX11::instance()->leaveEventLoop();
-//        }
-//        break;
-//    }
-//    default:
-//        break;
-//    }
-//}
