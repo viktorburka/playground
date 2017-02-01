@@ -46,7 +46,9 @@ void ApplicationX11::run()
 
     while (m_running) {
         XNextEvent(DisplayX11::display, &event);
-        fprintf(stderr, "Event received\n");
+        fprintf(stderr, "Event received. Type: %d, window: %u\n",
+                        (int)(event.xany.type),
+                        (uint)(event.xany.window));
         auto it = m_windows.find(event.xany.window);
         if (it != m_windows.end()) {
             processEvent(&event, it->second);

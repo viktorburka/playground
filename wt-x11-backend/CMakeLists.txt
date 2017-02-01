@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (wt-x11-driver)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_VERBOSE_MAKEFILE ON)
 add_executable(wt-x11-driver
                main.cpp
                application.cpp
@@ -9,9 +10,9 @@ add_executable(wt-x11-driver
                platforms/xlib/window-x11.h
                platforms/xlib/application-x11.cpp
                platforms/xlib/application-x11.h
-               interfaces/platformapplication.cpp
+#               interfaces/platformapplication.cpp
                interfaces/platformapplication.h
-#               window.cpp
+#               interfaces/window.cpp
                interfaces/window.h
                verification.cpp
                verification.h

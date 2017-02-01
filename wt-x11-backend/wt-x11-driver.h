@@ -5,10 +5,10 @@
 
 using namespace Wt;
 
-class WtX11DriverWindow: public Widget
+class WtDriverWidget: public Widget
 {
 public:
-    WtX11DriverWindow(int width, int height);
+    WtDriverWidget(int width, int height);
 
 protected:
     void drawEvent(int x, int y, int width, int height);

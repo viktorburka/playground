@@ -14,8 +14,10 @@ public:
     WindowX11(int width, int height);
 
     void show();
+    void hide();
     WindowId id() const;
     bool isTopLevel() const;
+    void setSize(int width, int height);
 
 protected:
     virtual void exposeEvent() {}

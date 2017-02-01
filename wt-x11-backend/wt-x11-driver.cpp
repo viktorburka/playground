@@ -1,13 +1,13 @@
 #include "wt-x11-driver.h"
 #include "paintbrush.h"
 
-WtX11DriverWindow::WtX11DriverWindow(int width, int height)
+WtDriverWidget::WtDriverWidget(int width, int height)
     : Widget(width, height)
 {
 
 }
 
-void WtX11DriverWindow::drawEvent(int x, int y, int width, int height)
+void WtDriverWidget::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
     pb.setOutlineColor("Red");

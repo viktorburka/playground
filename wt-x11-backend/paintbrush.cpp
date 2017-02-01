@@ -41,3 +41,15 @@ void PaintBrush::setOutlineColor(const std::string & colorName)
     XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
     XSetForeground(display, m_gc, xc.pixel);
 }
+
+void PaintBrush::setFillColor(const std::string & colorName)
+{
+    Colormap colorMap;
+    XColor xc, xc2;
+
+    Display* display = DisplayX11::display;
+    colorMap = DefaultColormap(display, DefaultScreen(display));
+
+    XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
+    XSetBackground(display, m_gc, xc.pixel);
+}

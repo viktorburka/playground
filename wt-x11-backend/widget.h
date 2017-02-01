@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#include <list>
+
 namespace Wt {
 
 class Window;
@@ -14,8 +16,17 @@ public:
     Widget(int width, int height);
 
     void show();
+    void hide();
     WindowId id() const;
     bool isTopLevel() const;
+    bool isVisible() const;
+
+    int width() const;
+    int height() const;
+    int x() const;
+    int y() const;
+
+    void setSize(int width, int height);
 
 protected:
     virtual void exposeEvent() {}
@@ -25,7 +36,15 @@ protected:
 private:
     void drawBackground(int x, int y, int width, int height);
 
+    int     m_x, m_y;
+    int     m_width, m_height;
+    bool    m_visible;
+
     Window* m_platformWin;
+
+    Widget* m_parent;
+    std::list<Widget*> m_children;
+
 #ifdef GP_X11
     friend class ApplicationX11;
 #endif

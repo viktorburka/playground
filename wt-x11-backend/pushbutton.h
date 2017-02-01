@@ -1,14 +1,20 @@
 #ifndef PUSHBUTTON_H
 #define PUSHBUTTON_H
 
-#include "window.h"
+#include "widget.h"
 
 namespace Wt {
 
-class PushButton: public Window
+class PushButton: public Widget
 {
 public:
-    PushButton(Window* parent) {}
+    PushButton(Widget* parent);
+
+protected:
+    void drawEvent(int x, int y, int width, int height);
+
+private:
+    bool m_pressed;
 };
 
 }
