@@ -12,6 +12,8 @@ public:
 
 protected:
     void drawEvent(int x, int y, int width, int height);
+    void mousePressEvent(int x, int y, MouseButtons state);
+    void mouseReleaseEvent(int x, int y, MouseButtons state);
 
 private:
     bool m_pressed;

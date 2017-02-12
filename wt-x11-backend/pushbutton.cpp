@@ -13,11 +13,21 @@ void PushButton::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
 
-    pb.setFillColor(m_pressed ? "Red" : "Red");
+    pb.setFillColor(m_pressed ? "Web Gray" : "Dark Gray");
     pb.fillRect(0, 0, Widget::width(), Widget::height());
 
-    //pb.fillRect(100, 100, 100, 100);
+    pb.setOutlineColor("Black");
+    pb.drawRect(0, 0, Widget::width()-1, Widget::height()-1);
+}
 
-//    pb.setOutlineColor("Red");
-//    pb.drawRect(0, 0, Widget::width()-1, Widget::height()-1);
+void PushButton::mousePressEvent(int x, int y, MouseButtons state)
+{
+    m_pressed = state && LeftButton;
+    repaint();
+}
+
+void PushButton::mouseReleaseEvent(int x, int y, MouseButtons state)
+{
+    m_pressed = !(state && LeftButton);
+    repaint();
 }

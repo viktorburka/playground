@@ -29,8 +29,8 @@ void PaintBrush::fillRect(int x, int y, int width, int height)
 //    int adjustedWidth = m_surface->width() - x - 1;
 //    int adjustedHeight = m_surface->height() - y - 1;
 
-    int adjustedWidth = x + width >= m_surface->width() ? m_surface->width()-x-1 : width;
-    int adjustedHeight = y + height >= m_surface->height() ? m_surface->height()-y-1 : height;
+    int adjustedWidth = x + width >= m_surface->width() ? m_surface->width()-x : width;
+    int adjustedHeight = y + height >= m_surface->height() ? m_surface->height()-y : height;
 
     Display* display = DisplayX11::display;
     XFillRectangle(display, m_surface->id(), m_gc, x, y, adjustedWidth, adjustedHeight);

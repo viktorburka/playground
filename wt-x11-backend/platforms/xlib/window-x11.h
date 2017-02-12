@@ -18,11 +18,14 @@ public:
     WindowId id() const;
     bool isTopLevel() const;
     void setSize(int width, int height);
+    void setPosition(int x, int y);
 
 protected:
     virtual void exposeEvent() {}
     virtual void drawEvent(int x, int y, int width, int height) {}
     virtual void closeEvent() {}
+
+    void repaint();
 
 private:
     WindowId m_win;

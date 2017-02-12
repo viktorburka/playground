@@ -90,11 +90,20 @@ int Widget::y() const
 void Widget::setSize(int width, int height)
 {
     m_platformWin->setSize(width, height);
+    m_width = width;
+    m_height = height;
 }
 
 void Widget::setPosition(int x, int y)
 {
+    m_platformWin->setPosition(x, y);
+    m_x = x;
+    m_y = y;
+}
 
+void Widget::repaint()
+{
+    m_platformWin->repaint();
 }
 
 void Widget::drawBackground(int x, int y, int width, int height)

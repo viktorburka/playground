@@ -10,7 +10,9 @@ int main(int argc, char * argv[])
 
     WtDriverWidget window(800,600);
     PushButton pb(&window);
-    pb.setSize(400, 300);
+    pb.setSize(150, 50);
+    pb.setPosition((window.width()-pb.width())/2,
+                   (window.height()-pb.height())/2);
 
     window.show();
 

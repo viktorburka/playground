@@ -124,7 +124,7 @@ void ApplicationX11::leaveEventLoop()
 
 void ApplicationX11::processEvent(XEvent* event, Widget* widget)
 {
-    fprintf(stderr, "Event: %d\n", event->type);
+    //fprintf(stderr, "Event: %d\n", event->type);
 
     switch (event->xany.type) {
     case Expose: {
@@ -142,6 +142,23 @@ void ApplicationX11::processEvent(XEvent* event, Widget* widget)
         widget->m_y = ce.y;
         widget->m_width  = ce.width;
         widget->m_height = ce.height;
+        fprintf(stderr, "width: %d, height: %d, x: %d, y: %d\n", ce.width, ce.height, ce.x, ce.y);
+        break;
+    }
+    case ButtonPress: {
+        XButtonPressedEvent bpe = event->xbutton;
+        MouseButtons ms;
+        if (bpe.state | Button1Mask)
+            ms |= LeftButton;
+        widget->mousePressEvent(bpe.x, bpe.y, ms);
+        break;
+    }
+    case ButtonRelease: {
+        XButtonReleasedEvent bre = event->xbutton;
+        MouseButtons ms;
+        if (bre.state | Button1Mask)
+            ms |= LeftButton;
+        widget->mouseReleaseEvent(bre.x, bre.y, ms);
         break;
     }
     case ClientMessage: {

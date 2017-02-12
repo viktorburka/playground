@@ -15,15 +15,19 @@ public:
     virtual WindowId id() const { return (WindowId)0; }
     virtual bool isTopLevel() const { return false; }
     virtual void setSize(int width, int height) {}
+    virtual void setPosition(int x, int y) {}
 
 protected:
     virtual void exposeEvent() {}
     virtual void drawEvent(int x, int y, int width, int height) {}
     virtual void closeEvent() {}
+    virtual void mousePressEvent(int x, int y, MouseButtons state) {}
+    virtual void mouseReleaseEvent(int x, int y, MouseButtons state) {}
 
-//private:
-//    Window* m_parent;
-//    std::list<Window*> m_children;
+    virtual void repaint() {}
+
+private:
+    friend class Widget;
 };
 
 }

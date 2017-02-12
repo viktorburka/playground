@@ -29,7 +29,7 @@ WindowX11::WindowX11(WindowX11 *parent)
     if (m_topLevel && !DisplayX11::currentGC())
         DisplayX11::gc = XCreateGC(display, m_win, 0, NULL);
 
-    XSelectInput(display, m_win, ExposureMask | ButtonPressMask | StructureNotifyMask);
+    XSelectInput(display, m_win, ExposureMask | StructureNotifyMask | ButtonPressMask | ButtonReleaseMask);
     XSetWMProtocols(display, m_win, &DisplayX11::closeWinMsg, 1);
 }
 
@@ -68,7 +68,7 @@ WindowX11::WindowX11(int width, int height)
     if (!DisplayX11::currentGC())
         DisplayX11::gc = XCreateGC(display, m_win, 0, NULL);
 
-    XSelectInput(display, m_win, ExposureMask | ButtonPressMask | StructureNotifyMask);
+    XSelectInput(display, m_win, ExposureMask | StructureNotifyMask | ButtonPressMask | ButtonReleaseMask);
     XSetWMProtocols(display, m_win, &DisplayX11::closeWinMsg, 1);
 }
 
@@ -98,4 +98,29 @@ void WindowX11::setSize(int width, int height)
 {
     Display* display = DisplayX11::currentDisplay();
     XResizeWindow(display, m_win, width, height);
+}
+
+void WindowX11::setPosition(int x, int y)
+{
+    Display* display = DisplayX11::currentDisplay();
+    XMoveWindow(display, m_win, x, y);
+}
+
+void WindowX11::repaint()
+{
+    Display* display = DisplayX11::currentDisplay();
+
+    XExposeEvent event;
+    event.type = Expose;
+//    unsigned long serial;	/* # of last request processed by server */
+//    Bool send_event;	/* true if this came from a SendEvent request */
+    event.display = display;
+    event.window = m_win;
+    event.x = 0;
+    event.y = 0;
+    event.width = m_width;
+    event.height = m_height;
+    event.count = 0;
+
+    XSendEvent(display, m_win, true, ExposureMask,(XEvent *)&event);
 }
