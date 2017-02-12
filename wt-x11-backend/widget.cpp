@@ -92,9 +92,15 @@ void Widget::setSize(int width, int height)
     m_platformWin->setSize(width, height);
 }
 
+void Widget::setPosition(int x, int y)
+{
+
+}
+
 void Widget::drawBackground(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
     pb.setOutlineColor("LightGrey");
     pb.fillRect(x, y, width, height);
+    fprintf(stderr, "x = %d, y = %d, width = %d, height = %d\n", x, y, width, height);
 }

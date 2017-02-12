@@ -27,6 +27,7 @@ public:
     int y() const;
 
     void setSize(int width, int height);
+    void setPosition(int x, int y);
 
 protected:
     virtual void exposeEvent() {}

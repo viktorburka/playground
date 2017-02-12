@@ -14,8 +14,10 @@ WindowX11::WindowX11(WindowX11 *parent)
     Display* display = DisplayX11::currentDisplay();
 
     int screen_num = DefaultScreen(display);
-    int border_width = 1;
-
+    int border_width = 0;
+#ifdef VISUAL_DEBUG
+    border_width = 1;
+#endif
     m_win = XCreateSimpleWindow(display,
                                 m_topLevel ? RootWindow(display, screen_num) : parent->id(),
                                 m_xpos, m_ypos,
@@ -27,7 +29,7 @@ WindowX11::WindowX11(WindowX11 *parent)
     if (m_topLevel && !DisplayX11::currentGC())
         DisplayX11::gc = XCreateGC(display, m_win, 0, NULL);
 
-    XSelectInput(display, m_win, ExposureMask | ButtonPressMask);
+    XSelectInput(display, m_win, ExposureMask | ButtonPressMask | StructureNotifyMask);
     XSetWMProtocols(display, m_win, &DisplayX11::closeWinMsg, 1);
 }
 
@@ -66,7 +68,7 @@ WindowX11::WindowX11(int width, int height)
     if (!DisplayX11::currentGC())
         DisplayX11::gc = XCreateGC(display, m_win, 0, NULL);
 
-    XSelectInput(display, m_win, ExposureMask | ButtonPressMask);
+    XSelectInput(display, m_win, ExposureMask | ButtonPressMask | StructureNotifyMask);
     XSetWMProtocols(display, m_win, &DisplayX11::closeWinMsg, 1);
 }
 

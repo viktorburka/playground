@@ -26,8 +26,14 @@ void PaintBrush::drawRect(int x, int y, int width, int height)
 
 void PaintBrush::fillRect(int x, int y, int width, int height)
 {
+//    int adjustedWidth = m_surface->width() - x - 1;
+//    int adjustedHeight = m_surface->height() - y - 1;
+
+    int adjustedWidth = x + width >= m_surface->width() ? m_surface->width()-x-1 : width;
+    int adjustedHeight = y + height >= m_surface->height() ? m_surface->height()-y-1 : height;
+
     Display* display = DisplayX11::display;
-    XFillRectangle(display, m_surface->id(), m_gc, x, y, width, height);
+    XFillRectangle(display, m_surface->id(), m_gc, x, y, adjustedWidth, adjustedHeight);
 }
 
 void PaintBrush::setOutlineColor(const std::string & colorName)
@@ -51,5 +57,5 @@ void PaintBrush::setFillColor(const std::string & colorName)
     colorMap = DefaultColormap(display, DefaultScreen(display));
 
     XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
-    XSetBackground(display, m_gc, xc.pixel);
+    XSetForeground(display, m_gc, xc.pixel);
 }

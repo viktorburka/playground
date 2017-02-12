@@ -9,9 +9,9 @@ WtDriverWidget::WtDriverWidget(int width, int height)
 
 void WtDriverWidget::drawEvent(int x, int y, int width, int height)
 {
-    PaintBrush pb(this);
-    pb.setOutlineColor("Red");
-    pb.drawRect(50, 50, 50, 50);
-    pb.setOutlineColor("Green");
-    pb.fillRect(100, 100, 100, 100);
+//    PaintBrush pb(this);
+//    pb.setOutlineColor("Red");
+//    pb.drawRect(50, 50, 50, 50);
+//    pb.setOutlineColor("Green");
+//    pb.fillRect(100, 100, 100, 100);
 }
