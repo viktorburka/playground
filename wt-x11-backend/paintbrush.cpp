@@ -59,3 +59,16 @@ void PaintBrush::setFillColor(const std::string & colorName)
     XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
     XSetForeground(display, m_gc, xc.pixel);
 }
+
+void PaintBrush::drawText(const std::string & text)
+{
+    Display* display = DisplayX11::display;
+    XFontStruct* fontInfo = DisplayX11::fontInfo;
+
+    auto textWidth = XTextWidth(fontInfo, text.data(), text.length());
+
+    XDrawString(display, m_surface->id(), m_gc,
+                (m_surface->width()-textWidth)/2,
+                (m_surface->height() + fontInfo->ascent)/2,
+                text.data(), text.length());
+}

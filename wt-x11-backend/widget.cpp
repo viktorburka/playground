@@ -7,6 +7,8 @@
 #include "window-x11.h"
 #endif
 
+#include <algorithm>
+
 using namespace Wt;
 
 Widget::Widget(Widget* parent)
@@ -99,6 +101,28 @@ void Widget::setPosition(int x, int y)
     m_platformWin->setPosition(x, y);
     m_x = x;
     m_y = y;
+}
+
+BindEvent Widget::bindEvent(const std::string & name)
+{
+    auto it = std::find(m_events.begin(), m_events.end(), name);
+    if (it != m_events.end()) {
+        m_events.push_back(name);
+    }
+    return BindEvent(name, this);
+}
+
+void Widget::addEventBinding(const std::string & name, std::function<void()> fn)
+{
+    m_bindings[name] = fn;
+}
+
+void Widget::sendEvent(const std::string & name)
+{
+    auto it = m_bindings.find(name);
+    if (it != m_bindings.end()) {
+        m_bindings[name]();
+    }
 }
 
 void Widget::repaint()

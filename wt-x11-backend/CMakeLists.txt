@@ -24,8 +24,12 @@ add_executable(wt-x11-driver
                wt-x11-driver.h
                pushbutton.cpp
                pushbutton.h
+               wtlabel.cpp
+               wtlabel.h
                widget.cpp
                widget.h
+               bindevent.cpp
+               bindevent.h
                types.h)
 target_link_libraries(wt-x11-driver X11)
 add_definitions(-DGP_X11)

@@ -19,6 +19,7 @@ public:
     void fillRect(int x, int y, int width, int height);
     void setOutlineColor(const std::string & colorName);
     void setFillColor(const std::string & colorName);
+    void drawText(const std::string & text);
 
 private:
     Widget* m_surface;

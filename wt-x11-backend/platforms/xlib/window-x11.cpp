@@ -65,8 +65,10 @@ WindowX11::WindowX11(int width, int height)
                                 WhitePixel(display, screen_num));
     fprintf(stderr, "Created window: %u\n", (uint)m_win);
 
-    if (!DisplayX11::currentGC())
+    if (!DisplayX11::currentGC()) {
         DisplayX11::gc = XCreateGC(display, m_win, 0, NULL);
+        XSetFont(DisplayX11::display, DisplayX11::gc, DisplayX11::fontInfo->fid);
+    }
 
     XSelectInput(display, m_win, ExposureMask | StructureNotifyMask | ButtonPressMask | ButtonReleaseMask);
     XSetWMProtocols(display, m_win, &DisplayX11::closeWinMsg, 1);
@@ -112,8 +114,6 @@ void WindowX11::repaint()
 
     XExposeEvent event;
     event.type = Expose;
-//    unsigned long serial;	/* # of last request processed by server */
-//    Bool send_event;	/* true if this came from a SendEvent request */
     event.display = display;
     event.window = m_win;
     event.x = 0;

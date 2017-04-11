@@ -75,7 +75,23 @@ ApplicationX11::ApplicationX11()
 
     DisplayX11::initWindowManager(DisplayX11::display);
 
-//    m_instance = this;
+    int count;
+    char** fonts = XListFonts(DisplayX11::display, "*", INT32_MAX, &count);
+
+    fprintf(stderr, "Available fonts count: %d\n", count);
+
+    for(int i = 0; i < count; ++i)
+        fprintf(stderr, "%s\n", fonts[i]);
+
+    XFreeFontNames(fonts);
+
+    fprintf(stderr, "Loading font ... \n");
+
+    DisplayX11::fontInfo = XLoadQueryFont(DisplayX11::display, "9x15bold");
+    if (!DisplayX11::fontInfo) {
+        fprintf(stderr, "Can't load font: %s\n", "fixed");
+        exit(-1);
+    }
 }
 
 ApplicationX11::~ApplicationX11()

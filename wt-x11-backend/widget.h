@@ -2,8 +2,12 @@
 #define WIDGET_H
 
 #include "types.h"
+#include "bindevent.h"
 
 #include <list>
+#include <string>
+#include <map>
+#include <functional>
 
 namespace Wt {
 
@@ -29,6 +33,10 @@ public:
     void setSize(int width, int height);
     void setPosition(int x, int y);
 
+    BindEvent bindEvent(const std::string & name);
+    void addEventBinding(const std::string & name, std::function<void()> fn);
+    void sendEvent(const std::string & name);
+
 protected:
     virtual void exposeEvent() {}
     virtual void drawEvent(int x, int y, int width, int height) {}
@@ -53,6 +61,9 @@ private:
 #ifdef GP_X11
     friend class ApplicationX11;
 #endif
+
+    std::list<std::string> m_events;
+    std::map<std::string,std::function<void()>> m_bindings;
 };
 
 }

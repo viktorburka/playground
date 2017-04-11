@@ -1,27 +1,33 @@
-#ifndef PUSHBUTTON_H
-#define PUSHBUTTON_H
+#ifndef WTLABEL_H
+#define WTLABEL_H
 
 #include "widget.h"
 
 #include <string>
 
-namespace Wt {
-
-class PushButton: public Widget
+/*class TestObj
 {
 public:
-    PushButton(Widget* parent);
+    TestObj() { str = "Hello!"; }
+    std::string str;
+};*/
+
+namespace Wt {
+
+class WtLabel: public Widget
+{
+public:
+    WtLabel(Widget* parent);
 
     std::string text() const;
     void setText(const std::string & text);
 
+    //void test(TestObj && t);
+
 protected:
     void drawEvent(int x, int y, int width, int height);
-    void mousePressEvent(int x, int y, MouseButtons state);
-    void mouseReleaseEvent(int x, int y, MouseButtons state);
 
 private:
-    bool m_pressed;
     std::string m_text;
 };
 
