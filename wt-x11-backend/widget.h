@@ -3,15 +3,17 @@
 
 #include "types.h"
 #include "bindevent.h"
+#include "window.h"
 
 #include <list>
 #include <string>
 #include <map>
 #include <functional>
+#include <memory>
 
 namespace Wt {
 
-class Window;
+//class Window;
 
 class Widget
 {
@@ -56,7 +58,8 @@ private:
     int     m_width, m_height;
     bool    m_visible;
 
-    Window* m_platformWin;
+    //Window* m_platformWin;
+    std::unique_ptr<Window> m_platformWin;
 
     Widget* m_parent;
     std::list<Widget*> m_children;

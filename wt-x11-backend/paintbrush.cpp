@@ -36,7 +36,7 @@ void PaintBrush::fillRect(int x, int y, int width, int height)
     XFillRectangle(display, m_surface->id(), m_gc, x, y, adjustedWidth, adjustedHeight);
 }
 
-void PaintBrush::setOutlineColor(const std::string & colorName)
+void PaintBrush::setPaintColor(const std::string & colorName)
 {
     Colormap colorMap;
     XColor xc, xc2;
@@ -48,7 +48,7 @@ void PaintBrush::setOutlineColor(const std::string & colorName)
     XSetForeground(display, m_gc, xc.pixel);
 }
 
-void PaintBrush::setFillColor(const std::string & colorName)
+/*void PaintBrush::setFillColor(const std::string & colorName)
 {
     Colormap colorMap;
     XColor xc, xc2;
@@ -57,8 +57,9 @@ void PaintBrush::setFillColor(const std::string & colorName)
     colorMap = DefaultColormap(display, DefaultScreen(display));
 
     XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
-    XSetForeground(display, m_gc, xc.pixel);
-}
+    //XSetForeground(display, m_gc, xc.pixel);
+    XSetBackground(display, m_gc, xc.pixel);
+}*/
 
 void PaintBrush::drawText(const std::string & text)
 {

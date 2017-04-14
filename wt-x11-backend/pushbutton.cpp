@@ -14,10 +14,10 @@ void PushButton::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
 
-    pb.setFillColor(m_pressed ? "Web Gray" : "Dark Gray");
+    pb.setPaintColor(m_pressed ? "Web Gray" : "Dark Gray");
     pb.fillRect(0, 0, Widget::width(), Widget::height());
 
-    pb.setOutlineColor("Black");
+    pb.setPaintColor("Black");
     pb.drawRect(0, 0, Widget::width()-1, Widget::height()-1);
 
     if (m_text.length())

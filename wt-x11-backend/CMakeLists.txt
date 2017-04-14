@@ -30,6 +30,8 @@ add_executable(wt-x11-driver
                widget.h
                bindevent.cpp
                bindevent.h
+               listview.cpp
+               listview.h
                types.h)
 target_link_libraries(wt-x11-driver X11)
 add_definitions(-DGP_X11)

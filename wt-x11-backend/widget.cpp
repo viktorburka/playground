@@ -19,9 +19,9 @@ Widget::Widget(Widget* parent)
     , m_name("Widget")
 {
 #ifdef GP_X11
-    WindowX11* x11win = dynamic_cast<WindowX11*>(parent->m_platformWin);
+    WindowX11* x11win = dynamic_cast<WindowX11*>(parent->m_platformWin.get());
     check_null_ptr(x11win);
-    m_platformWin = new WindowX11(x11win);
+    m_platformWin.reset(new WindowX11(x11win));
 #endif
     Application::instance()->addWindow(this);
 
@@ -39,7 +39,7 @@ Widget::Widget(int width, int height)
     , m_name("Widget")
 {
 #ifdef GP_X11
-    m_platformWin = new WindowX11(width, height);
+    m_platformWin.reset(new WindowX11(width, height));
 #endif
     Application::instance()->addWindow(this);
 }
@@ -145,7 +145,7 @@ void Widget::repaint()
 void Widget::drawBackground(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
-    pb.setOutlineColor("LightGrey");
+    pb.setPaintColor("LightGrey");
     pb.fillRect(x, y, width, height);
     fprintf(stderr, "x = %d, y = %d, width = %d, height = %d\n", x, y, width, height);
 }

@@ -17,8 +17,7 @@ public:
 
     void drawRect(int x, int y, int width, int height);
     void fillRect(int x, int y, int width, int height);
-    void setOutlineColor(const std::string & colorName);
-    void setFillColor(const std::string & colorName);
+    void setPaintColor(const std::string & colorName);
     void drawText(const std::string & text);
 
 private:

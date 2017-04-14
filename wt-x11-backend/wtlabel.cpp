@@ -29,6 +29,6 @@ void WtLabel::setText(const std::string & text)
 void WtLabel::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
-    pb.setOutlineColor("Black");
+    pb.setPaintColor("Black");
     pb.drawText(m_text);
 }

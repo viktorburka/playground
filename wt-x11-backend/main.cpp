@@ -2,6 +2,7 @@
 #include "wt-x11-driver.h"
 #include "pushbutton.h"
 #include "wtlabel.h"
+#include "listview.h"
 
 #include "stdio.h"
 
@@ -29,6 +30,16 @@ int main(int argc, char * argv[])
     label.setText("Hello!");
 
     pb.bindEvent("click").to([&label]{label.setText("Button");});
+
+    ListView lw(&window);
+    lw.setSize(200, 400);
+    lw.setPosition(window.width()-lw.width()-10, 0);
+    lw.setSelectedIndex(1);
+
+    //std::list<std::string> list = ;
+    lw.setData({"1","2","3","4","5","6"});
+
+    fprintf(stderr, "Left: %d\n", lw.x());
 
     window.show();
 
