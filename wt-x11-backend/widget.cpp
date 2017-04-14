@@ -16,6 +16,7 @@ Widget::Widget(Widget* parent)
     , m_width(0), m_height(0)
     , m_visible(false)
     , m_parent(parent)
+    , m_name("Widget")
 {
 #ifdef GP_X11
     WindowX11* x11win = dynamic_cast<WindowX11*>(parent->m_platformWin);
@@ -35,6 +36,7 @@ Widget::Widget(int width, int height)
     , m_width(width), m_height(height)
     , m_visible(false)
     , m_parent(0)
+    , m_name("Widget")
 {
 #ifdef GP_X11
     m_platformWin = new WindowX11(width, height);
@@ -101,6 +103,16 @@ void Widget::setPosition(int x, int y)
     m_platformWin->setPosition(x, y);
     m_x = x;
     m_y = y;
+}
+
+std::string Widget::name() const
+{
+    return m_name;
+}
+
+void Widget::setName(const std::string & name)
+{
+    m_name = name;
 }
 
 BindEvent Widget::bindEvent(const std::string & name)

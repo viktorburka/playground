@@ -33,6 +33,9 @@ public:
     void setSize(int width, int height);
     void setPosition(int x, int y);
 
+    std::string name() const;
+    void setName(const std::string & name);
+
     BindEvent bindEvent(const std::string & name);
     void addEventBinding(const std::string & name, std::function<void()> fn);
     void sendEvent(const std::string & name);
@@ -57,6 +60,7 @@ private:
 
     Widget* m_parent;
     std::list<Widget*> m_children;
+    std::string m_name;
 
 #ifdef GP_X11
     friend class ApplicationX11;

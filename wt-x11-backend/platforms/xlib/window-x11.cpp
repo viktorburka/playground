@@ -99,7 +99,9 @@ bool WindowX11::isTopLevel() const
 void WindowX11::setSize(int width, int height)
 {
     Display* display = DisplayX11::currentDisplay();
-    XResizeWindow(display, m_win, width, height);
+    m_width = width;
+    m_height = height;
+    XResizeWindow(display, m_win, m_width, m_height);
 }
 
 void WindowX11::setPosition(int x, int y)
@@ -121,6 +123,6 @@ void WindowX11::repaint()
     event.width = m_width;
     event.height = m_height;
     event.count = 0;
-
+    //fprintf(stderr, "XSendEvent m_width: %d, m_height: %d\n", m_width, m_height);
     XSendEvent(display, m_win, true, ExposureMask,(XEvent *)&event);
 }

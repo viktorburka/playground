@@ -28,10 +28,10 @@ protected:
     void repaint();
 
 private:
-    WindowId m_win;
-    int      m_width, m_height;
-    int      m_xpos, m_ypos;
-    bool     m_topLevel;
+    WindowId    m_win;
+    int         m_width, m_height;
+    int         m_xpos, m_ypos;
+    bool        m_topLevel;
 
     friend class ApplicationX11;
 };

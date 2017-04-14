@@ -144,6 +144,8 @@ void ApplicationX11::processEvent(XEvent* event, Widget* widget)
 
     switch (event->xany.type) {
     case Expose: {
+        std::string name = widget->name();
+        //fprintf(stderr, "Expose event for window: %s\n", name.c_str());
         XExposeEvent ee = event->xexpose;
         //if (ee.count == 0) { // ignoring queued up expose events
         widget->exposeEvent();
@@ -158,7 +160,7 @@ void ApplicationX11::processEvent(XEvent* event, Widget* widget)
         widget->m_y = ce.y;
         widget->m_width  = ce.width;
         widget->m_height = ce.height;
-        fprintf(stderr, "width: %d, height: %d, x: %d, y: %d\n", ce.width, ce.height, ce.x, ce.y);
+        //fprintf(stderr, "width: %d, height: %d, x: %d, y: %d\n", ce.width, ce.height, ce.x, ce.y);
         break;
     }
     case ButtonPress: {

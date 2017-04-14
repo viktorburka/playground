@@ -7,6 +7,7 @@ PushButton::PushButton(Widget* parent)
     : Widget(parent)
     , m_pressed(false)
 {
+    setName("PushButton");
 }
 
 void PushButton::drawEvent(int x, int y, int width, int height)

@@ -6,6 +6,7 @@ using namespace Wt;
 WtLabel::WtLabel(Widget* parent)
     : Widget(parent)
 {
+    setName("WtLabel");
 }
 
 std::string WtLabel::text() const
