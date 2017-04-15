@@ -1,5 +1,6 @@
 #include "listview.h"
 #include "paintbrush.h"
+#include "rect.h"
 
 using namespace Wt;
 
@@ -35,11 +36,16 @@ void ListView::drawEvent(int x, int y, int width, int height)
 
     int ycoord = 0;
 
-    for(int i = 0; i < m_items.size(); ++i) {
+    //for(int i = 0; i < m_items.size(); ++i) {
+    std::list<std::string>::iterator it;
+    int i = 0;
+    for(it = m_items.begin(); it != m_items.end(); ++it, ++i) {
         pb.setPaintColor(i == m_index ? "Light Sky Blue" : "White");
         pb.fillRect(0, ycoord, this->width()-1, ItemHeight);
         pb.setPaintColor("Black");
         pb.drawRect(0, ycoord, this->width()-1, ItemHeight);
+        pb.setPaintColor("Black");
+        pb.drawText(*it, Rect(0, ycoord, this->width()-1, ItemHeight));
         ycoord += ItemHeight;
     }
 }

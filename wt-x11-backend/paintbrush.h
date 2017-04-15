@@ -9,6 +9,7 @@ namespace Wt {
 
 class Widget;
 class WindowX11;
+class Rect;
 
 class PaintBrush
 {
@@ -19,6 +20,7 @@ public:
     void fillRect(int x, int y, int width, int height);
     void setPaintColor(const std::string & colorName);
     void drawText(const std::string & text);
+    void drawText(const std::string & text, const Rect & rect);
 
 private:
     Widget* m_surface;

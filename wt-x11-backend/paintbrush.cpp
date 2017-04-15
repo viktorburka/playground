@@ -2,6 +2,7 @@
 #include "window-x11.h"
 #include "display-x11.h"
 #include "widget.h"
+#include "rect.h"
 
 using namespace Wt;
 
@@ -71,5 +72,22 @@ void PaintBrush::drawText(const std::string & text)
     XDrawString(display, m_surface->id(), m_gc,
                 (m_surface->width()-textWidth)/2,
                 (m_surface->height() + fontInfo->ascent)/2,
+                text.data(), text.length());
+}
+
+void PaintBrush::drawText(const std::string & text, const Rect & rect)
+{
+    Display* display = DisplayX11::display;
+    XFontStruct* fontInfo = DisplayX11::fontInfo;
+
+    auto textWidth = XTextWidth(fontInfo, text.data(), text.length());
+
+//    XDrawString(display, m_surface->id(), m_gc,
+//                (rect.width()-textWidth)/2,
+//                (rect.height()+fontInfo->ascent)/2 + rect.y(),
+//                text.data(), text.length());
+    XDrawString(display, m_surface->id(), m_gc,
+                (rect.geometry(Rect::w)-textWidth)/2,
+                (rect.geometry(Rect::h)+fontInfo->ascent)/2 + rect.y(),
                 text.data(), text.length());
 }
