@@ -26,6 +26,11 @@ public:
     int geometry(Geometry g) const;
     void setGeometry(Geometry g, int value);
 
+    bool contains(int x, int y) const;
+
+    Rect& operator=(Rect && rect);
+    //Rect& operator=(const Rect & rect);
+
 private:
     int m_x;
     int m_y;

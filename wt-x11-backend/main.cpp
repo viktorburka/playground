@@ -32,12 +32,11 @@ int main(int argc, char * argv[])
     pb.bindEvent("click").to([&label]{label.setText("Button");});
 
     ListView lw(&window);
-    lw.setSize(200, 400);
-    lw.setPosition(window.width()-lw.width()-10, 0);
+    lw.setSize(200, 200);
+    lw.setPosition(window.width()-lw.width()-10, 20);
     lw.setSelectedIndex(1);
 
-    //std::list<std::string> list = ;
-    lw.setData({"1","2","3","4","5","6"});
+    lw.setData({"1","2","3","4","5","6","7","8","9"});
 
     fprintf(stderr, "Left: %d\n", lw.x());
 

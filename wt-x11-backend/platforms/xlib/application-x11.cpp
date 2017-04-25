@@ -160,7 +160,7 @@ void ApplicationX11::processEvent(XEvent* event, Widget* widget)
         widget->m_y = ce.y;
         widget->m_width  = ce.width;
         widget->m_height = ce.height;
-        //fprintf(stderr, "width: %d, height: %d, x: %d, y: %d\n", ce.width, ce.height, ce.x, ce.y);
+        widget->geometryChangeEvent(ce.x, ce.y, ce.width, ce.height);
         break;
     }
     case ButtonPress: {

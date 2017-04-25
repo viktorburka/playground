@@ -16,7 +16,9 @@ class PaintBrush
 public:
     PaintBrush(Widget* widget);
 
+    void drawRect(const Rect & rect);
     void drawRect(int x, int y, int width, int height);
+    void fillRect(const Rect & rect);
     void fillRect(int x, int y, int width, int height);
     void setPaintColor(const std::string & colorName);
     void drawText(const std::string & text);

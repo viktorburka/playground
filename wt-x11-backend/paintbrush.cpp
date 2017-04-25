@@ -19,17 +19,24 @@ PaintBrush::PaintBrush(Widget* widget)
     XSetFillStyle(display, m_gc, FillSolid);
 }
 
+void PaintBrush::drawRect(const Rect & rect)
+{
+    drawRect(rect.x(), rect.y(), rect.width(), rect.height());
+}
+
 void PaintBrush::drawRect(int x, int y, int width, int height)
 {
     Display* display = DisplayX11::display;
     XDrawRectangle(display, m_surface->id(), m_gc, x, y, width, height);
 }
 
+void PaintBrush::fillRect(const Rect & rect)
+{
+    fillRect(rect.x(), rect.y(), rect.width(), rect.height());
+}
+
 void PaintBrush::fillRect(int x, int y, int width, int height)
 {
-//    int adjustedWidth = m_surface->width() - x - 1;
-//    int adjustedHeight = m_surface->height() - y - 1;
-
     int adjustedWidth = x + width >= m_surface->width() ? m_surface->width()-x : width;
     int adjustedHeight = y + height >= m_surface->height() ? m_surface->height()-y : height;
 
@@ -48,19 +55,6 @@ void PaintBrush::setPaintColor(const std::string & colorName)
     XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
     XSetForeground(display, m_gc, xc.pixel);
 }
-
-/*void PaintBrush::setFillColor(const std::string & colorName)
-{
-    Colormap colorMap;
-    XColor xc, xc2;
-
-    Display* display = DisplayX11::display;
-    colorMap = DefaultColormap(display, DefaultScreen(display));
-
-    XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
-    //XSetForeground(display, m_gc, xc.pixel);
-    XSetBackground(display, m_gc, xc.pixel);
-}*/
 
 void PaintBrush::drawText(const std::string & text)
 {

@@ -63,3 +63,31 @@ void Rect::setGeometry(Geometry g, int value)
     if (g != Geometry::enum_size)
         values[g] = value;
 }
+
+bool Rect::contains(int x, int y) const
+{
+    return (x >= m_x && x < m_width) &&
+           (y >= m_y && y < m_height);
+}
+
+Rect& Rect::operator=(Rect && rect)
+{
+    m_x = rect.m_x;
+    m_y = rect.m_y;
+    m_width  = rect.m_width;
+    m_height = rect.m_height;
+
+    values = rect.values;
+    rect.values = nullptr;
+}
+
+/*Rect& Rect::operator=(const Rect & rect)
+{
+    m_x = rect.m_x;
+    m_y = rect.m_y;
+    m_width  = rect.m_width;
+    m_height = rect.m_height;
+
+    values = new int[4];
+    memcpy(values, rect.values, enum_size*sizeof(int));
+}*/

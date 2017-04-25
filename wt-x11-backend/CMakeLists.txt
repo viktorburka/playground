@@ -34,6 +34,8 @@ add_executable(wt-x11-driver
                listview.h
                rect.cpp
                rect.h
+               wt.cpp
+               wt.h
                types.h)
 target_link_libraries(wt-x11-driver X11)
 add_definitions(-DGP_X11)

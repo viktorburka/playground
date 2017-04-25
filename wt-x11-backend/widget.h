@@ -48,6 +48,7 @@ protected:
     virtual void closeEvent() {}
     virtual void mousePressEvent(int x, int y, MouseButtons state) {}
     virtual void mouseReleaseEvent(int x, int y, MouseButtons state) {}
+    virtual void geometryChangeEvent(int x, int y, int width, int height) {}
 
     void repaint();
 
