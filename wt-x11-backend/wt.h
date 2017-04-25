@@ -3,6 +3,8 @@
 
 namespace Wt {
 
+class Rect;
+
 template<typename T>
 T boundary(T value, T min, T max)
 {
@@ -12,6 +14,16 @@ T boundary(T value, T min, T max)
         return max;
     return value;
 }
+
+class WtPrint
+{
+public:
+    ~WtPrint();
+
+    WtPrint& operator<<(const Rect & rect);
+    WtPrint& operator<<(int number);
+    WtPrint& operator<<(const char* str);
+};
 
 }
 

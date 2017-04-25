@@ -29,7 +29,9 @@ public:
     bool contains(int x, int y) const;
 
     Rect& operator=(Rect && rect);
-    //Rect& operator=(const Rect & rect);
+    Rect& operator=(const Rect & rect);
+
+    void setRect(int x, int y, int width, int height);
 
 private:
     int m_x;
