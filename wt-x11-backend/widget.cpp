@@ -147,5 +147,5 @@ void Widget::drawBackground(int x, int y, int width, int height)
     PaintBrush pb(this);
     pb.setPaintColor("LightGrey");
     pb.fillRect(x, y, width, height);
-    fprintf(stderr, "x = %d, y = %d, width = %d, height = %d\n", x, y, width, height);
+    //fprintf(stderr, "x = %d, y = %d, width = %d, height = %d\n", x, y, width, height);
 }

@@ -27,7 +27,7 @@ void PaintBrush::drawRect(const Rect & rect)
 void PaintBrush::drawRect(int x, int y, int width, int height)
 {
     Display* display = DisplayX11::display;
-    XDrawRectangle(display, m_surface->id(), m_gc, x, y, width, height);
+    XDrawRectangle(display, m_surface->id(), m_gc, x, y, width-1, height-1);
 }
 
 void PaintBrush::fillRect(const Rect & rect)

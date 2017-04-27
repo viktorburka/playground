@@ -38,8 +38,6 @@ int main(int argc, char * argv[])
 
     lw.setData({"1","2","3","4","5","6","7","8","9"});
 
-    fprintf(stderr, "Left: %d\n", lw.x());
-
     window.show();
 
     application.run();

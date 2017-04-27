@@ -53,7 +53,7 @@ private:
     Rect m_thumbUpRect;
     Rect m_thumbDownRect;
 
-    static const int ThumbLength = 20;
+    static const int ThumbLength = 18;
 };
 
 class ListView: public Widget
@@ -73,6 +73,7 @@ protected:
     void geometryChangeEvent(int x, int y, int width, int height);
 
 private:
+    void drawScrollBarFrame(PaintBrush & pb, const Rect & rect) const;
     void drawThumb(PaintBrush & pb, const Rect & rect, bool up) const;
     void drawScroller(PaintBrush & pb, const Rect & rect) const;
 

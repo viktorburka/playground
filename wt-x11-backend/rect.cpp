@@ -99,3 +99,8 @@ void Rect::setRect(int x, int y, int width, int height)
     m_width  = width;
     m_height = height;
 }
+
+void Rect::setRect(const Rect & rect)
+{
+    setRect(rect.x(), rect.y(), rect.width(), rect.height());
+}

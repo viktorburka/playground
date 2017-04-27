@@ -34,6 +34,10 @@
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
+            <Add option="-DGP_X11" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend/interfaces" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib" />
             <Add directory="/usr/include" />
             <Add directory="/usr/include/c++/4.8" />
             <Add directory="/usr/include/c++/4.8/backward" />
@@ -57,6 +61,10 @@
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
+            <Add option="-DGP_X11" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend/interfaces" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib" />
             <Add directory="/usr/include" />
             <Add directory="/usr/include/c++/4.8" />
             <Add directory="/usr/include/c++/4.8/backward" />
@@ -74,29 +82,69 @@
          </MakeCommands>
       </Target>
       </Build>
-      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/application-x11.cpp">
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/application.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/bindevent.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/display-x11.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/listview.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/main.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/paintbrush.cpp">
       </Unit>
-      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/window-x11.cpp">
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/application-x11.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/window-x11.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/pushbutton.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/rect.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/verification.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/widget.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt-x11-driver.cpp">
       </Unit>
-      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/application-x11.h">
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtlabel.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/application.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/bindevent.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/display-x11.h">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/platformapplication.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/window.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/listview.h">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/paintbrush.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/application-x11.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/window-x11.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/pushbutton.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/rect.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/types.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/verification.h">
       </Unit>
-      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/window-x11.h">
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/widget.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt-x11-driver.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtlabel.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/CMakeLists.txt">
           <Option virtualFolder="CMake Files\" />

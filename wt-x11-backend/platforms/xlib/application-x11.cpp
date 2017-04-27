@@ -78,14 +78,14 @@ ApplicationX11::ApplicationX11()
     int count;
     char** fonts = XListFonts(DisplayX11::display, "*", INT32_MAX, &count);
 
-    fprintf(stderr, "Available fonts count: %d\n", count);
+//    fprintf(stderr, "Available fonts count: %d\n", count);
 
-    for(int i = 0; i < count; ++i)
-        fprintf(stderr, "%s\n", fonts[i]);
+//    for(int i = 0; i < count; ++i)
+//        fprintf(stderr, "%s\n", fonts[i]);
 
-    XFreeFontNames(fonts);
+//    XFreeFontNames(fonts);
 
-    fprintf(stderr, "Loading font ... \n");
+//    fprintf(stderr, "Loading font ... \n");
 
     DisplayX11::fontInfo = XLoadQueryFont(DisplayX11::display, "9x15bold");
     if (!DisplayX11::fontInfo) {
@@ -109,10 +109,10 @@ void ApplicationX11::run()
     while (m_running) {
         XNextEvent(DisplayX11::display, &event);
         int eventType = (int)(event.xany.type);
-        fprintf(stderr, "Event received. Type: %d, name: %s, window: %u\n",
-                        eventType,
-                        eventType > MaxEventNumber ? "Unknown" : eventNames[eventType],
-                        (uint)(event.xany.window));
+//        fprintf(stderr, "Event received. Type: %d, name: %s, window: %u\n",
+//                        eventType,
+//                        eventType > MaxEventNumber ? "Unknown" : eventNames[eventType],
+//                        (uint)(event.xany.window));
         auto it = m_windows.find(event.xany.window);
         if (it != m_windows.end()) {
             processEvent(&event, it->second);
@@ -144,8 +144,6 @@ void ApplicationX11::processEvent(XEvent* event, Widget* widget)
 
     switch (event->xany.type) {
     case Expose: {
-        std::string name = widget->name();
-        //fprintf(stderr, "Expose event for window: %s\n", name.c_str());
         XExposeEvent ee = event->xexpose;
         //if (ee.count == 0) { // ignoring queued up expose events
         widget->exposeEvent();

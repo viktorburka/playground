@@ -7,10 +7,8 @@
 
 using namespace Wt;
 
-//ScrollerGeometry::ScrollerGeometry(int x, int y, int width, int height)
-//    : Rect(x, y, width, height)
-//{
-//}
+const int ScrollBarWidth = 20;
+const int ThumbLength    = ScrollBarWidth - 4; // minux 2px on each side
 
 ListView::ListView(Widget * parent)
     : Widget(parent)
@@ -38,7 +36,6 @@ void ListView::setSelectedIndex(int index)
 void ListView::drawEvent(int x, int y, int width, int height)
 {
     const int ItemHeight = 30;
-    const int ScrollBarWidth = 20;
 
     PaintBrush pb(this);
 
@@ -48,8 +45,7 @@ void ListView::drawEvent(int x, int y, int width, int height)
     // draw scroll bar
     if (ItemHeight*m_items.size() > this->height()) {
         effective_width = this->width() - ScrollBarWidth;
-        pb.setPaintColor("Light Steel Blue");
-        pb.fillRect(effective_width, 0, ScrollBarWidth, this->height());
+        drawScrollBarFrame(pb, m_sg);
         drawThumb(pb, m_sg.thumbUpRect(), true);
         drawThumb(pb, m_sg.thumbDownRect(), false);
         drawScroller(pb, m_sg.scrollerAreaRect());
@@ -57,7 +53,7 @@ void ListView::drawEvent(int x, int y, int width, int height)
 
     int i = 0;
     for(auto it = m_items.begin(); it != m_items.end(); ++it, ++i) {
-        Rect itemRect(0, ycoord-m_viewOffset, effective_width-1, ItemHeight);
+        Rect itemRect(0, ycoord-m_viewOffset, effective_width, ItemHeight+1);
         pb.setPaintColor(i == m_index ? "Light Sky Blue" : "White");
         pb.fillRect(itemRect);
         pb.setPaintColor("Black");
@@ -100,15 +96,15 @@ void ListView::mouseReleaseEvent(int x, int y, MouseButtons state)
 
 void ListView::geometryChangeEvent(int x, int y, int width, int height)
 {
-    const int ThumbLength = 20;
     const int ItemHeight  = 30;
 
-    int viewWidth = width - ThumbLength;
-    Rect thumbUpRect      = Rect(viewWidth, 0, ThumbLength-1, ThumbLength);
-    Rect thumbDownRect    = Rect(viewWidth, height-ThumbLength, ThumbLength-1, ThumbLength);
-    Rect scrollerAreaRect = Rect(viewWidth, ThumbLength, ThumbLength, height-ThumbLength*2);
+    int viewWidth = width - ScrollBarWidth;
+    Rect scrolBarRect     = Rect(viewWidth-1, 0, ScrollBarWidth, height);
+    Rect thumbUpRect      = Rect(scrolBarRect.x()+2, 2, ThumbLength, ThumbLength);
+    Rect thumbDownRect    = Rect(scrolBarRect.x()+2, height-ThumbLength-2, ThumbLength, ThumbLength);
+    Rect scrollerAreaRect = Rect(scrolBarRect.x()+2, ThumbLength+3, ThumbLength, height-(ThumbLength+3)*2);
 
-    m_sg.setRect(viewWidth, 0, ThumbLength, height);
+    m_sg.setRect(scrolBarRect);
     m_sg.setThumbUpRect(thumbUpRect);
     m_sg.setThumbDownRect(thumbDownRect);
     m_sg.setScrollerAreaRect(scrollerAreaRect);
@@ -117,6 +113,14 @@ void ListView::geometryChangeEvent(int x, int y, int width, int height)
 
     int totalHeight = m_items.size()*ItemHeight;
     m_maxViewOffset    = totalHeight <= height ? 0 : (totalHeight - height);
+}
+
+void ListView::drawScrollBarFrame(PaintBrush & pb, const Rect & rect) const
+{
+    pb.setPaintColor("Light Steel Blue");
+    pb.fillRect(rect);
+    pb.setPaintColor("Black");
+    pb.drawRect(rect);
 }
 
 void ListView::drawThumb(PaintBrush & pb, const Rect & rect, bool up) const
@@ -132,8 +136,8 @@ void ListView::drawScroller(PaintBrush & pb, const Rect & rect) const
     const int ItemHeight  = 30;
 
     int scrollerHeight = m_sg.scrollerHeight(ItemHeight, m_items.size());
-    Rect scrollerRect(rect.x()+1, rect.y()+2+m_scrollerOffset,
-                      rect.width()-3, scrollerHeight-4);
+    Rect scrollerRect(rect.x(), rect.y()+m_scrollerOffset,
+                      rect.width(), scrollerHeight);
 
     pb.setPaintColor("Powder Blue");
     pb.fillRect(scrollerRect);

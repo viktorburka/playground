@@ -39,7 +39,7 @@ add_executable(wt-x11-driver
                types.h)
 target_link_libraries(wt-x11-driver X11)
 add_definitions(-DGP_X11)
-add_definitions(-DVISUAL_DEBUG)
+#add_definitions(-DVISUAL_DEBUG)
 target_include_directories(wt-x11-driver PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/platforms/xlib

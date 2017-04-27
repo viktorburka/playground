@@ -32,6 +32,7 @@ public:
     Rect& operator=(const Rect & rect);
 
     void setRect(int x, int y, int width, int height);
+    void setRect(const Rect & rect);
 
 private:
     int m_x;
