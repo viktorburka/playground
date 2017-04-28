@@ -7,6 +7,7 @@
 
 using namespace Wt;
 
+const int ItemHeight     = 30;
 const int ScrollBarWidth = 20;
 const int ThumbLength    = ScrollBarWidth - 4; // minux 2px on each side
 
@@ -35,8 +36,6 @@ void ListView::setSelectedIndex(int index)
 
 void ListView::drawEvent(int x, int y, int width, int height)
 {
-    const int ItemHeight = 30;
-
     PaintBrush pb(this);
 
     int ycoord = 0;
@@ -66,8 +65,6 @@ void ListView::drawEvent(int x, int y, int width, int height)
 
 void ListView::mousePressEvent(int x, int y, MouseButtons state)
 {
-    const int ItemHeight = 30;
-
     if (state && LeftButton) {
         if (m_viewRect.contains(x,y)) {
             int index = y / ItemHeight;
@@ -77,13 +74,13 @@ void ListView::mousePressEvent(int x, int y, MouseButtons state)
             int scrollerHeight = m_sg.scrollerHeight(ItemHeight, m_items.size());
             m_scrollerOffset = (m_sg.scrollerAreaRect().height() - scrollerHeight) * m_viewOffset/m_maxViewOffset;
             repaint();
-            WtPrint() << "Up, offset:" << m_viewOffset;
+            //WtPrint() << "Up, offset:" << m_viewOffset;
         } else if (m_sg.thumbDownRect().contains(x,y)) {
             m_viewOffset = Wt::boundary(m_viewOffset + ItemHeight/2, 0, m_maxViewOffset);
             int scrollerHeight = m_sg.scrollerHeight(ItemHeight, m_items.size());
             m_scrollerOffset = (m_sg.scrollerAreaRect().height() - scrollerHeight) * m_viewOffset/m_maxViewOffset;
             repaint();
-            WtPrint() << "Down, offset:" << m_viewOffset;
+            //WtPrint() << "Down, offset:" << m_viewOffset;
         }
     }
 }
@@ -96,13 +93,13 @@ void ListView::mouseReleaseEvent(int x, int y, MouseButtons state)
 
 void ListView::geometryChangeEvent(int x, int y, int width, int height)
 {
-    const int ItemHeight  = 30;
-
     int viewWidth = width - ScrollBarWidth;
-    Rect scrolBarRect     = Rect(viewWidth-1, 0, ScrollBarWidth, height);
-    Rect thumbUpRect      = Rect(scrolBarRect.x()+2, 2, ThumbLength, ThumbLength);
-    Rect thumbDownRect    = Rect(scrolBarRect.x()+2, height-ThumbLength-2, ThumbLength, ThumbLength);
-    Rect scrollerAreaRect = Rect(scrolBarRect.x()+2, ThumbLength+3, ThumbLength, height-(ThumbLength+3)*2);
+    int offset    = m_sg.borderOffset();
+
+    Rect scrolBarRect     = Rect(viewWidth-1, 0, ScrollBarWidth, height); // -1 to allign it with list view right border
+    Rect thumbUpRect      = Rect(scrolBarRect.x()+offset, offset, ThumbLength, ThumbLength);
+    Rect thumbDownRect    = Rect(scrolBarRect.x()+offset, height-ThumbLength-offset, ThumbLength, ThumbLength);
+    Rect scrollerAreaRect = Rect(scrolBarRect.x()+offset, ThumbLength+offset+1, ThumbLength, height-(ThumbLength+offset+1)*2);
 
     m_sg.setRect(scrolBarRect);
     m_sg.setThumbUpRect(thumbUpRect);
@@ -133,8 +130,6 @@ void ListView::drawThumb(PaintBrush & pb, const Rect & rect, bool up) const
 
 void ListView::drawScroller(PaintBrush & pb, const Rect & rect) const
 {
-    const int ItemHeight  = 30;
-
     int scrollerHeight = m_sg.scrollerHeight(ItemHeight, m_items.size());
     Rect scrollerRect(rect.x(), rect.y()+m_scrollerOffset,
                       rect.width(), scrollerHeight);

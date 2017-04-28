@@ -46,6 +46,9 @@ public:
                           : scrollerAreaHeight;
     }
 
+    int borderOffset() const
+        { return BorderOffset; }
+
 private:
     int  m_offset{0};
 
@@ -53,7 +56,8 @@ private:
     Rect m_thumbUpRect;
     Rect m_thumbDownRect;
 
-    static const int ThumbLength = 18;
+    static const int ThumbLength  = 18;
+    static const int BorderOffset = 2;
 };
 
 class ListView: public Widget

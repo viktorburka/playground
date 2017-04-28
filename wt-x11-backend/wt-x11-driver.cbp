@@ -112,6 +112,8 @@
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtlabel.cpp">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wttextedit.cpp">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/application.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/bindevent.h">
@@ -145,6 +147,8 @@
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtlabel.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wttextedit.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/CMakeLists.txt">
           <Option virtualFolder="CMake Files\" />
