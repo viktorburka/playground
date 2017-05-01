@@ -32,6 +32,9 @@ public:
     int x() const;
     int y() const;
 
+    int dpiX() const;
+    int dpiY() const;
+
     void setSize(int width, int height);
     void setPosition(int x, int y);
 

@@ -15,10 +15,16 @@ public:
 
     void show();
     void hide();
+
     WindowId id() const;
+
     bool isTopLevel() const;
+
     void setSize(int width, int height);
     void setPosition(int x, int y);
+
+    int dpiX() const;
+    int dpiY() const;
 
 protected:
     virtual void exposeEvent() {}
@@ -32,6 +38,8 @@ private:
     int         m_width, m_height;
     int         m_xpos, m_ypos;
     bool        m_topLevel;
+    int         m_dpix;
+    int         m_dpiy;
 
     friend class ApplicationX11;
 };

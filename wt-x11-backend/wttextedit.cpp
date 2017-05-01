@@ -18,4 +18,5 @@ void WtTextEdit::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
     //pb.drawText();
+    pb.drawGlyph("A");
 }

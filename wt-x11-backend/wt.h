@@ -1,6 +1,8 @@
 #ifndef WT_H
 #define WT_H
 
+#include <string>
+
 namespace Wt {
 
 class Rect;
@@ -23,6 +25,7 @@ public:
     WtPrint& operator<<(const Rect & rect);
     WtPrint& operator<<(int number);
     WtPrint& operator<<(const char* str);
+    WtPrint& operator<<(const std::string & str);
 };
 
 }

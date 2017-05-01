@@ -3,6 +3,7 @@
 #include "pushbutton.h"
 #include "wtlabel.h"
 #include "listview.h"
+#include "wttextedit.h"
 
 #include "stdio.h"
 
@@ -35,8 +36,12 @@ int main(int argc, char * argv[])
     lw.setSize(200, 200);
     lw.setPosition(window.width()-lw.width()-10, 20);
     lw.setSelectedIndex(1);
-
     lw.setData({"1","2","3","4","5","6","7","8","9"});
+
+    WtTextEdit textEdit(&window);
+    textEdit.setSize(300, 300);
+    textEdit.setPosition(0, window.height()/2);
+    textEdit.setText("A");
 
     window.show();
 

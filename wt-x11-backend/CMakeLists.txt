@@ -10,10 +10,11 @@ add_executable(wt-x11-driver
                platforms/xlib/window-x11.h
                platforms/xlib/application-x11.cpp
                platforms/xlib/application-x11.h
-#               interfaces/platformapplication.cpp
+               platforms/xlib/image-x11.cpp
+               platforms/xlib/image-x11.h
                interfaces/platformapplication.h
-#               interfaces/window.cpp
                interfaces/window.h
+               interfaces/platformimage.h
                verification.cpp
                verification.h
                display-x11.cpp
@@ -38,12 +39,17 @@ add_executable(wt-x11-driver
                wt.h
                wttextedit.cpp
                wttextedit.h
+               wtimage.cpp
+               wtimage.h
                types.h)
-target_link_libraries(wt-x11-driver X11)
+link_directories(/home/victor/Dev/freetype-2.7.1/lib)
+target_link_libraries(wt-x11-driver X11 freetype)
 add_definitions(-DGP_X11)
 #add_definitions(-DVISUAL_DEBUG)
 target_include_directories(wt-x11-driver PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/platforms/xlib
   ${CMAKE_CURRENT_SOURCE_DIR}/interfaces
+  /home/victor/Dev/freetype-2.7.1/include
+  /home/victor/Dev/freetype-2.7.1/include/freetype2
 )

@@ -1,6 +1,9 @@
 #include "window-x11.h"
 #include "display-x11.h"
 #include "verification.h"
+#include "wt.h"
+
+#include <cmath>
 
 using namespace Wt;
 
@@ -18,6 +21,7 @@ WindowX11::WindowX11(WindowX11 *parent)
 #ifdef VISUAL_DEBUG
     border_width = 1;
 #endif
+
     m_win = XCreateSimpleWindow(display,
                                 m_topLevel ? RootWindow(display, screen_num) : parent->id(),
                                 m_xpos, m_ypos,
@@ -28,6 +32,9 @@ WindowX11::WindowX11(WindowX11 *parent)
 
     if (m_topLevel && !DisplayX11::currentGC())
         DisplayX11::gc = XCreateGC(display, m_win, 0, NULL);
+
+    m_dpix = parent->dpiX();
+    m_dpiy = parent->dpiY();
 
     XSelectInput(display, m_win, ExposureMask | StructureNotifyMask | ButtonPressMask | ButtonReleaseMask);
     XSetWMProtocols(display, m_win, &DisplayX11::closeWinMsg, 1);
@@ -44,6 +51,15 @@ WindowX11::WindowX11(int width, int height)
 
     int screen_num = DefaultScreen(display);
     int border_width = 1;
+
+    int widthMM = DisplayWidthMM(display, screen_num);
+    int heightMM = DisplayHeightMM(display, screen_num);
+
+    int widthPx = DisplayWidth(display, screen_num);
+    int heightPx = DisplayHeight(display, screen_num);
+
+    m_dpix = round(widthPx * 25.4 / widthMM);
+    m_dpiy = round(heightPx * 25.4 / heightMM);
 
     if (m_width == 0 || m_height == 0) {
         ::Window root;
@@ -108,6 +124,16 @@ void WindowX11::setPosition(int x, int y)
 {
     Display* display = DisplayX11::currentDisplay();
     XMoveWindow(display, m_win, x, y);
+}
+
+int WindowX11::dpiX() const
+{
+    return m_dpix;
+}
+
+int WindowX11::dpiY() const
+{
+    return m_dpiy;
 }
 
 void WindowX11::repaint()

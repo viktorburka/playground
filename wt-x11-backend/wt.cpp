@@ -27,3 +27,8 @@ WtPrint& WtPrint::operator<<(const char* str)
 {
     fprintf(stderr, "%s ", str);
 }
+
+WtPrint& WtPrint::operator<<(const std::string & str)
+{
+    fprintf(stderr, "%s ", str.c_str());
+}

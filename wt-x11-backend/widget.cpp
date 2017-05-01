@@ -91,6 +91,16 @@ int Widget::y() const
     return m_y;
 }
 
+int Widget::dpiX() const
+{
+    return m_platformWin->dpiX();
+}
+
+int Widget::dpiY() const
+{
+    return m_platformWin->dpiY();
+}
+
 void Widget::setSize(int width, int height)
 {
     m_platformWin->setSize(width, height);

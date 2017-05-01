@@ -16,6 +16,8 @@ public:
     virtual bool isTopLevel() const { return false; }
     virtual void setSize(int width, int height) {}
     virtual void setPosition(int x, int y) {}
+    virtual int dpiX() const = 0;
+    virtual int dpiY() const = 0;
 
 protected:
     virtual void exposeEvent() {}

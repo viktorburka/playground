@@ -35,6 +35,8 @@
          <Option compiler="gcc" />
          <Compiler>
             <Add option="-DGP_X11" />
+            <Add directory="/home/victor/Dev/freetype-2.7.1/include" />
+            <Add directory="/home/victor/Dev/freetype-2.7.1/include/freetype2" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/interfaces" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib" />
@@ -62,6 +64,8 @@
          <Option compiler="gcc" />
          <Compiler>
             <Add option="-DGP_X11" />
+            <Add directory="/home/victor/Dev/freetype-2.7.1/include" />
+            <Add directory="/home/victor/Dev/freetype-2.7.1/include/freetype2" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/interfaces" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib" />
@@ -96,6 +100,8 @@
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/application-x11.cpp">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/image-x11.cpp">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/window-x11.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/pushbutton.cpp">
@@ -110,6 +116,8 @@
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt.cpp">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtimage.cpp">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtlabel.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wttextedit.cpp">
@@ -122,6 +130,8 @@
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/platformapplication.h">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/platformimage.h">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/window.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/listview.h">
@@ -129,6 +139,8 @@
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/paintbrush.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/application-x11.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/image-x11.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/window-x11.h">
       </Unit>
@@ -145,6 +157,8 @@
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt-x11-driver.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtimage.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtlabel.h">
       </Unit>

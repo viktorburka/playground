@@ -3,6 +3,7 @@
 #include "window-x11.h"
 #include "verification.h"
 #include "widget.h"
+#include "wt.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,7 +56,11 @@ static const char* eventNames[] = {
     "LASTEvent"             // 36
 };
 
-//ApplicationX11* ApplicationX11::m_instance = 0;
+int errorHandler(Display *, XErrorEvent *)
+{
+    WtPrint() << "XErrorEvent received";
+    exit(-1);
+}
 
 ApplicationX11::ApplicationX11()
     : m_running(false)
@@ -64,6 +69,8 @@ ApplicationX11::ApplicationX11()
 //        fprintf(stderr, "There can not be more than one instance of Application");
 //        exit(-1);
 //    }
+
+    XSetErrorHandler(errorHandler);
 
     DisplayX11::display = XOpenDisplay(NULL); //TO-DO: read DISPLAY env variable
     if (DisplayX11::display == NULL) {
