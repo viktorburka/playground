@@ -4,7 +4,6 @@
 namespace Wt {
 
 class PlatformImage;
-class PaintBrush;
 
 class WtImage
 {
@@ -13,8 +12,9 @@ public:
 
 private:
     PlatformImage* m_platformImage;
-
-    friend class PaintBrush;
+#ifdef GP_X11
+    friend class PaintBrushX11;
+#endif
 };
 
 }

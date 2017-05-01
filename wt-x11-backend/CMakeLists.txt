@@ -12,9 +12,12 @@ add_executable(wt-x11-driver
                platforms/xlib/application-x11.h
                platforms/xlib/image-x11.cpp
                platforms/xlib/image-x11.h
+               platforms/xlib/paintbrush-x11.cpp
+               platforms/xlib/paintbrush-x11.h
                interfaces/platformapplication.h
                interfaces/window.h
                interfaces/platformimage.h
+               interfaces/platformpaintbrush.h
                verification.cpp
                verification.h
                display-x11.cpp

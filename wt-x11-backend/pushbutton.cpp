@@ -1,5 +1,6 @@
 #include "pushbutton.h"
 #include "paintbrush.h"
+#include "wt.h"
 
 using namespace Wt;
 
@@ -21,7 +22,7 @@ void PushButton::drawEvent(int x, int y, int width, int height)
     pb.drawRect(0, 0, Widget::width()-1, Widget::height()-1);
 
     if (m_text.length())
-        pb.drawText(m_text);
+        pb.drawText(m_text, Rect(0,0,Widget::width(),Widget::height()));
 }
 
 std::string PushButton::text() const

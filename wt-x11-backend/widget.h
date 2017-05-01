@@ -4,6 +4,7 @@
 #include "types.h"
 #include "bindevent.h"
 #include "window.h"
+#include "rect.h"
 
 #include <list>
 #include <string>
@@ -31,6 +32,8 @@ public:
     int height() const;
     int x() const;
     int y() const;
+
+//    Rect rect() const;
 
     int dpiX() const;
     int dpiY() const;
@@ -72,6 +75,7 @@ private:
 #ifdef GP_X11
     friend class ApplicationX11;
 #endif
+    friend class PaintBrush;
 
     std::list<std::string> m_events;
     std::map<std::string,std::function<void()>> m_bindings;

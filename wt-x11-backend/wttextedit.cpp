@@ -6,6 +6,7 @@ using namespace Wt;
 WtTextEdit::WtTextEdit(Widget* parent)
     : Widget(parent)
 {
+    setName("WtTextEdit");
 }
 
 void WtTextEdit::setText(const std::string & text)

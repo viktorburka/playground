@@ -1,13 +1,14 @@
 #include "paintbrush.h"
-#include "window-x11.h"
-#include "display-x11.h"
 #include "widget.h"
 #include "rect.h"
 #include "wt.h"
 #include "wtimage.h"
 #include "platformimage.h"
 
-#include <X11/Xutil.h>
+#ifdef GP_X11
+#include "paintbrush-x11.h"
+#include "window-x11.h"
+#endif
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -17,14 +18,10 @@ using namespace Wt;
 PaintBrush::PaintBrush(Widget* widget)
     : m_surface(widget)
 {
-    Display* display = DisplayX11::display;
-
-//    XGCValues values;
-//    values.foreground = WhitePixel(display, DefaultScreen(display));
-//    values.line_width = 1;
-//    values.line_style = LineSolid;
-    m_gc = DisplayX11::currentGC();
-    XSetFillStyle(display, m_gc, FillSolid);
+#ifdef GP_X11
+    WindowX11* winX11 = static_cast<WindowX11*>(widget->m_platformWin.get());
+    m_platformBrush = new PaintBrushX11(winX11);
+#endif
 }
 
 void PaintBrush::drawRect(const Rect & rect)
@@ -34,8 +31,7 @@ void PaintBrush::drawRect(const Rect & rect)
 
 void PaintBrush::drawRect(int x, int y, int width, int height)
 {
-    Display* display = DisplayX11::display;
-    XDrawRectangle(display, m_surface->id(), m_gc, x, y, width-1, height-1);
+    m_platformBrush->drawRect(x, y, width, height);
 }
 
 void PaintBrush::fillRect(const Rect & rect)
@@ -48,50 +44,22 @@ void PaintBrush::fillRect(int x, int y, int width, int height)
     int adjustedWidth = x + width >= m_surface->width() ? m_surface->width()-x : width;
     int adjustedHeight = y + height >= m_surface->height() ? m_surface->height()-y : height;
 
-    Display* display = DisplayX11::display;
-    XFillRectangle(display, m_surface->id(), m_gc, x, y, adjustedWidth, adjustedHeight);
+    m_platformBrush->fillRect(x, y, adjustedWidth, adjustedHeight);
 }
 
 void PaintBrush::setPaintColor(const std::string & colorName)
 {
-    Colormap colorMap;
-    XColor xc, xc2;
-
-    Display* display = DisplayX11::display;
-    colorMap = DefaultColormap(display, DefaultScreen(display));
-
-    XAllocNamedColor(display, colorMap, colorName.c_str(), &xc, &xc2);
-    XSetForeground(display, m_gc, xc.pixel);
+    m_platformBrush->setPaintColor(colorName);
 }
 
-void PaintBrush::drawText(const std::string & text)
-{
-    Display* display = DisplayX11::display;
-    XFontStruct* fontInfo = DisplayX11::fontInfo;
-
-    auto textWidth = XTextWidth(fontInfo, text.data(), text.length());
-
-    XDrawString(display, m_surface->id(), m_gc,
-                (m_surface->width()-textWidth)/2,
-                (m_surface->height() + fontInfo->ascent)/2,
-                text.data(), text.length());
-}
+//void PaintBrush::drawText(const std::string & text)
+//{
+//    m_platformBrush->drawText(text);
+//}
 
 void PaintBrush::drawText(const std::string & text, const Rect & rect)
 {
-    Display* display = DisplayX11::display;
-    XFontStruct* fontInfo = DisplayX11::fontInfo;
-
-    auto textWidth = XTextWidth(fontInfo, text.data(), text.length());
-
-//    XDrawString(display, m_surface->id(), m_gc,
-//                (rect.width()-textWidth)/2,
-//                (rect.height()+fontInfo->ascent)/2 + rect.y(),
-//                text.data(), text.length());
-    XDrawString(display, m_surface->id(), m_gc,
-                (rect.geometry(Rect::w)-textWidth)/2,
-                (rect.geometry(Rect::h)+fontInfo->ascent)/2 + rect.y(),
-                text.data(), text.length());
+    m_platformBrush->drawText(text, rect);
 }
 
 void PaintBrush::drawGlyph(const std::string & str)
@@ -171,11 +139,5 @@ void PaintBrush::drawGlyph(const std::string & str)
 
 void PaintBrush::drawImage(const WtImage & image, const Rect & rect)
 {
-    Display* display = DisplayX11::display;
-    XImage*      img = (XImage*)image.m_platformImage->platformImageStruct();
-
-    XPutImage(display, m_surface->id(), m_gc, img,
-              0, 0,
-              rect.x(), rect.y(),
-              img->width, img->height);
+    m_platformBrush->drawImage(image, rect);
 }

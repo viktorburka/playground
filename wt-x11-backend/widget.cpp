@@ -91,6 +91,11 @@ int Widget::y() const
     return m_y;
 }
 
+//Rect Widget::rect() const
+//{
+//    return Rect(m_x, m_y, m_width, m_height);
+//}
+
 int Widget::dpiX() const
 {
     return m_platformWin->dpiX();

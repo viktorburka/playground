@@ -24,5 +24,5 @@ void WtLabel::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
     pb.setPaintColor("Black");
-    pb.drawText(m_text);
+    pb.drawText(m_text, Rect(0,0,Widget::width(),Widget::height()));
 }

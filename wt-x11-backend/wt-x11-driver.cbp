@@ -102,6 +102,8 @@
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/image-x11.cpp">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/paintbrush-x11.cpp">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/window-x11.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/pushbutton.cpp">
@@ -132,6 +134,8 @@
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/platformimage.h">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/platformpaintbrush.h">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/window.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/listview.h">
@@ -141,6 +145,8 @@
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/application-x11.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/image-x11.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/paintbrush-x11.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib/window-x11.h">
       </Unit>

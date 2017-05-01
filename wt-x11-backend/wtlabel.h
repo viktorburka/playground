@@ -5,13 +5,6 @@
 
 #include <string>
 
-/*class TestObj
-{
-public:
-    TestObj() { str = "Hello!"; }
-    std::string str;
-};*/
-
 namespace Wt {
 
 class WtLabel: public Widget
@@ -21,8 +14,6 @@ public:
 
     std::string text() const;
     void setText(const std::string & text);
-
-    //void test(TestObj && t);
 
 protected:
     void drawEvent(int x, int y, int width, int height);
