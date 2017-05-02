@@ -38,6 +38,7 @@
             <Add directory="/home/victor/Dev/freetype-2.7.1/include" />
             <Add directory="/home/victor/Dev/freetype-2.7.1/include/freetype2" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend/imageformats" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/interfaces" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib" />
             <Add directory="/usr/include" />
@@ -67,6 +68,7 @@
             <Add directory="/home/victor/Dev/freetype-2.7.1/include" />
             <Add directory="/home/victor/Dev/freetype-2.7.1/include/freetype2" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend" />
+            <Add directory="/home/victor/Dev/playground/wt-x11-backend/imageformats" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/interfaces" />
             <Add directory="/home/victor/Dev/playground/wt-x11-backend/platforms/xlib" />
             <Add directory="/usr/include" />
@@ -91,6 +93,10 @@
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/bindevent.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/display-x11.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/imageformats/image-png.cpp">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/imageformats/imageformatfactory.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/listview.cpp">
       </Unit>
@@ -129,6 +135,12 @@
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/bindevent.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/display-x11.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/imageformats/image-png.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/imageformats/imageformatfactory.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/imageformat.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/interfaces/platformapplication.h">
       </Unit>

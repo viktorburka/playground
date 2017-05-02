@@ -123,12 +123,15 @@ void PaintBrush::drawGlyph(const std::string & str)
     int size = width*height*4;
     for(int i=0; i<size; i+=4) {
         //                    B     G     R     A
-        const char rgba[] = { 0x00, 0x00, 0xFF, 0x00 };
-        memcpy(data+i, rgba, 4);
+        const char bgra[] = { 0x00, 0x00, 0xFF, 0x00 };
+        memcpy(data+i, bgra, 4);
     }
 
-    WtImage image(width, height, data);
-    drawImage(image, Rect(0, 0, width, height));
+    WtImage image("/home/victor/Dev/test.png");
+    drawImage(image, Rect(0, 0, image.width(), image.height()));
+
+//    WtImage image(width, height, data);
+//    drawImage(image, Rect(0, 0, width, height));
 
 //    WtImage image(m_face->glyph->bitmap.buffer,
 //                  m_face->glyph->bitmap.width,

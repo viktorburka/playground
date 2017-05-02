@@ -18,6 +18,11 @@ add_executable(wt-x11-driver
                interfaces/window.h
                interfaces/platformimage.h
                interfaces/platformpaintbrush.h
+               interfaces/imageformat.h
+               imageformats/image-png.cpp
+               imageformats/image-png.h
+               imageformats/imageformatfactory.cpp
+               imageformats/imageformatfactory.h
                verification.cpp
                verification.h
                display-x11.cpp
@@ -45,14 +50,23 @@ add_executable(wt-x11-driver
                wtimage.cpp
                wtimage.h
                types.h)
-link_directories(/home/victor/Dev/freetype-2.7.1/lib)
-target_link_libraries(wt-x11-driver X11 freetype)
+
+link_directories(
+    /home/victor/Dev/freetype-2.7.1/lib
+#    /home/victor/Dev/libpng-1.6.29/lib
+)
+
+target_link_libraries(wt-x11-driver X11 freetype png)
 add_definitions(-DGP_X11)
 #add_definitions(-DVISUAL_DEBUG)
-target_include_directories(wt-x11-driver PUBLIC
+
+target_include_directories(
+    wt-x11-driver PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/platforms/xlib
   ${CMAKE_CURRENT_SOURCE_DIR}/interfaces
+  ${CMAKE_CURRENT_SOURCE_DIR}/imageformats
   /home/victor/Dev/freetype-2.7.1/include
   /home/victor/Dev/freetype-2.7.1/include/freetype2
+#  /home/victor/Dev/libpng-1.6.29/include
 )
