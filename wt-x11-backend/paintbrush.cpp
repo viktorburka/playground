@@ -77,7 +77,7 @@ void PaintBrush::drawGlyph(const std::string & str, const WtColor & background)
 
     auto TRUNC = [](int x) { return (x >> 6); };
 
-    const std::string fontFile = "/home/victor/Dev/roboto-master/src/hinted/Roboto-Regular.ttf";
+    const std::string fontFile = "examples/Roboto-Regular.ttf";
     const int pointSize = 32;
 
     FT_Library library     = 0;
