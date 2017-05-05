@@ -8,6 +8,7 @@ namespace Wt {
 class Widget;
 class Rect;
 class WtImage;
+class WtColor;
 class PlatformPaintBrush;
 
 class PaintBrush
@@ -23,7 +24,7 @@ public:
     //void drawText(const std::string & text);
     void drawText(const std::string & text, const Rect & rect);
 
-    void drawGlyph(const std::string & str);
+    void drawGlyph(const std::string & str, const WtColor & background);
     void drawImage(const WtImage & image, const Rect & rect);
 
 private:

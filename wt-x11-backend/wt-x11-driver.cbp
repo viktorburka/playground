@@ -124,6 +124,8 @@
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt.cpp">
       </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtcolor.cpp">
+      </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtimage.cpp">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtlabel.cpp">
@@ -175,6 +177,8 @@
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt-x11-driver.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wt.h">
+      </Unit>
+      <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtcolor.h">
       </Unit>
       <Unit filename="/home/victor/Dev/playground/wt-x11-backend/wtimage.h">
       </Unit>

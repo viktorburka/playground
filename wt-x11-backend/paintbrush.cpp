@@ -4,6 +4,7 @@
 #include "wt.h"
 #include "wtimage.h"
 #include "platformimage.h"
+#include "wtcolor.h"
 
 #ifdef GP_X11
 #include "paintbrush-x11.h"
@@ -12,6 +13,7 @@
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include <freetype/ftbitmap.h>
 
 using namespace Wt;
 
@@ -62,7 +64,7 @@ void PaintBrush::drawText(const std::string & text, const Rect & rect)
     m_platformBrush->drawText(text, rect);
 }
 
-void PaintBrush::drawGlyph(const std::string & str)
+void PaintBrush::drawGlyph(const std::string & str, const WtColor & background)
 {
     auto validate = [](FT_Error error,
                        const std::string & msg)
@@ -115,29 +117,27 @@ void PaintBrush::drawGlyph(const std::string & str)
     validate(error, "Error rendering glyph");
 
     WtPrint() << "Pixel mode:" << (int)face->glyph->bitmap.pixel_mode;
+    WtPrint() << "Num grays:" << (int)face->glyph->bitmap.num_grays;
 
-    int width  = 100;
-    int height = 100;
+    int width  = face->glyph->bitmap.width;
+    int height = face->glyph->bitmap.rows;
 
-    char* data = (char*)malloc(width*height*4);
-    int size = width*height*4;
-    for(int i=0; i<size; i+=4) {
-        //                    B     G     R     A
-        const char bgra[] = { 0x00, 0x00, 0xFF, 0x00 };
-        memcpy(data+i, bgra, 4);
+    unsigned char* buffer = face->glyph->bitmap.buffer;
+    char* imgData = (char*)malloc(width*height*4);
+
+    for (int i = 0; i < width*height; ++i) {
+        char bgra[4] = { 0x00, 0x00, 0x00, 0xFF };
+        if (!*buffer) {
+            memcpy(bgra, background.bgra(), 3);
+        }
+        ++buffer;
+        memcpy(imgData + i*4, bgra, 4);
     }
 
-    WtImage image("/home/victor/Dev/test.png");
+    WtImage image(face->glyph->bitmap.width,
+                  face->glyph->bitmap.rows,
+                  imgData);
     drawImage(image, Rect(0, 0, image.width(), image.height()));
-
-//    WtImage image(width, height, data);
-//    drawImage(image, Rect(0, 0, width, height));
-
-//    WtImage image(m_face->glyph->bitmap.buffer,
-//                  m_face->glyph->bitmap.width,
-//                  m_face->glyph->bitmap.rows,
-//                  m_face->glyph->bitmap.pitch,
-//                  QImage::Format_Indexed8);
 }
 
 void PaintBrush::drawImage(const WtImage & image, const Rect & rect)

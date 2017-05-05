@@ -13,6 +13,11 @@ ImageX11::ImageX11(int width, int height, char* data)
                            width, height, 32, 0);
 }
 
+ImageX11::~ImageX11()
+{
+    //XDestroyImage(m_image);
+}
+
 void* ImageX11::platformImageStruct() const
 {
     return (void*)m_image;

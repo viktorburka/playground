@@ -11,6 +11,7 @@ class ImageX11: public PlatformImage
 {
 public:
     ImageX11(int width, int height, char* data);
+    ~ImageX11();
 
     void* platformImageStruct() const;
 

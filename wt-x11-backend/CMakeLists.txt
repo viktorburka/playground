@@ -49,6 +49,8 @@ add_executable(wt-x11-driver
                wttextedit.h
                wtimage.cpp
                wtimage.h
+               wtcolor.cpp
+               wtcolor.h
                types.h)
 
 link_directories(

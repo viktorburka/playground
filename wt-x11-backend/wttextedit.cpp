@@ -1,5 +1,6 @@
 #include "wttextedit.h"
 #include "paintbrush.h"
+#include "wtcolor.h"
 
 using namespace Wt;
 
@@ -19,5 +20,5 @@ void WtTextEdit::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
     //pb.drawText();
-    pb.drawGlyph("A");
+    pb.drawGlyph("A", WtColor("Light Gray"));
 }
