@@ -19,6 +19,6 @@ void WtTextEdit::setText(const std::string & text)
 void WtTextEdit::drawEvent(int x, int y, int width, int height)
 {
     PaintBrush pb(this);
-    //pb.drawText();
-    pb.drawGlyph("A", WtColor("Light Gray"));
+    WtColor backgroundColor("Light Gray");
+    pb.drawText("Hello!", backgroundColor);
 }

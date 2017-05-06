@@ -21,10 +21,10 @@ public:
     void fillRect(const Rect & rect);
     void fillRect(int x, int y, int width, int height);
     void setPaintColor(const std::string & colorName);
-    //void drawText(const std::string & text);
+
     void drawText(const std::string & text, const Rect & rect);
 
-    void drawGlyph(const std::string & str, const WtColor & background);
+    void drawText(const std::string & str, const WtColor & background);
     void drawImage(const WtImage & image, const Rect & rect);
 
 private:
