@@ -73,7 +73,7 @@ void PaintBrush::drawText(const std::string & text, const WtColor & background)
 
     //auto TRUNC = [](int x) { return (x >> 6); };
 
-    const std::string fontFile = "examples/Roboto-Regular.ttf";
+    const std::string fontFile = "/home/victor/Dev/playground/wt-x11-backend/examples/Roboto-Regular.ttf";
     const int pointSize = 48;
 
     FT_Library library     = 0;
@@ -153,7 +153,7 @@ void PaintBrush::drawText(const std::string & text, const WtColor & background)
         char* imgData = (char*)malloc(width*height*4);
 
         for (int i = 0; i < width*height; ++i) {
-            char bgra[4] = { 0x00, 0x00, 0x00, 0xFF };
+            char bgra[4]; bgra[0] = 0x00; bgra[1] = 0x00; bgra[2] = 0x00; bgra[3] = 0xFF;// = { 0x00, 0x00, 0x00, 0xFF };
             if (!*buffer) {
                 memcpy(bgra, background.bgra(), 3);
             }

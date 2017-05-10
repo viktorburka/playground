@@ -15,8 +15,8 @@ public:
 
 private:
     char r,g,b,a;
-    char m_rgba[4] = { 0x00, 0x00, 0x00, 0xFF };
-    char m_bgra[4] = { 0x00, 0x00, 0x00, 0xFF };
+    char m_rgba[4];
+    char m_bgra[4];
 };
 
 }
