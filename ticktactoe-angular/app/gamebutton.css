@@ -1,0 +1,12 @@
+#gamebutton {
+    height: 100px;
+    width: 100px;
+    background-color: powderblue;
+    border: 1px solid black;
+    outline: none;
+    background-image: url( 'blue.png' );
+}
+
+#gamebutton:active { 
+    background-image: url( 'o.png' );
+}
