@@ -54,11 +54,11 @@ export class GameLogic {
         var col: number = Number(position.charAt(1));
         var state: CellState  = this.fieldMatrix[row][col];
         if (state == CellState.Opened_X) {
-            return "url('x.png')";
+            return "url('resources/x.png')";
         } else if (state == CellState.Opened_O) {
-            return "url('o.png')";
+            return "url('resources/o.png')";
         } else {
-            return "url('blue.png')";
+            return "url('resources/blue.png')";
         }
     }
 }

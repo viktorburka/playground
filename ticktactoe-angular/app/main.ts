@@ -1,4 +1,4 @@
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {MinesweeperModule} from './minesweeper.module';
+import {TicTacToeModule} from './components/tictactoe/tictactoe.module';
 
-platformBrowserDynamic().bootstrapModule(MinesweeperModule);
+platformBrowserDynamic().bootstrapModule(TicTacToeModule);
