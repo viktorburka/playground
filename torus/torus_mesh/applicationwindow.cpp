@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QWheelEvent>
 
 float degreeToRadians(float degree)
 {
@@ -46,13 +47,13 @@ void ApplicationWindow::initializeGL()
         exit(1);
     }
 
-    //    view.lookAt(QVector3D(0.0, 0.5, 0.5),
-    //                QVector3D(0.0, 0.0, 0.0),
-    //                QVector3D(0.0, 1.0, 0.0));
+//    m_viewMatrix.lookAt(QVector3D(0.0, 0.0, 3.0),
+//                QVector3D(0.0, 0.0, 0.0),
+//                QVector3D(0.0, 1.0, 0.0));
 
-    m_viewMatrix.lookAt(QVector3D(-2.0, 0.0, 3.0),
-                        QVector3D( 0.0, 0.0, 0.0),
-                        QVector3D( 0.0, 1.0, 0.0));
+//    m_viewMatrix.lookAt(QVector3D(-2.0, 0.0, 3.0),
+//                        QVector3D( 0.0, 0.0, 0.0),
+//                        QVector3D( 0.0, 1.0, 0.0));
 
     glEnable(GL_DEPTH_TEST);
 
@@ -121,8 +122,206 @@ void ApplicationWindow::initializeGL()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
+void ApplicationWindow::wheelEvent(QWheelEvent *e)
+{
+    zoomStart.setY(zoomStart.y() - e->delta() * 0.00025);
+    update();
+}
+
+void ApplicationWindow::mousePressEvent(QMouseEvent *e)
+{
+    if (state == State::NONE) {
+        state = mouseButtonToState(e->button());
+    }
+
+    if ( state == State::ROTATE ) {
+        moveCurr = getMouseOnCircle(e->pos().x(), e->pos().y());
+        movePrev = moveCurr;
+    } else if ( state == State::ZOOM ) {
+//        _zoomStart.copy( getMouseOnScreen( event.pageX, event.pageY ) );
+//        _zoomEnd.copy( _zoomStart );
+    } else if ( state == State::PAN ) {
+        panStart = getMouseOnScreen(e->pos().x(), e->pos().y());
+        panEnd = panStart;
+    }
+}
+
+void ApplicationWindow::mouseMoveEvent(QMouseEvent * e)
+{
+    if ( state == State::ROTATE ) {
+
+        movePrev = moveCurr;
+        moveCurr = getMouseOnCircle( e->pos().x(), e->pos().y() );
+        update();
+
+    } else if ( state == State::ZOOM ) {
+
+//        _zoomEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) );
+
+    } else if ( state == State::PAN ) {
+
+        panEnd = getMouseOnScreen( e->pos().x(), e->pos().y() );
+        update();
+        qDebug() << "pan";
+    }
+}
+
+void ApplicationWindow::mouseReleaseEvent(QMouseEvent *)
+{
+    state = State::NONE;
+}
+
+void ApplicationWindow::zoomCamera()
+{
+    double factor;
+    factor = 1.0 + ( zoomEnd.y() - zoomStart.y() ) * zoomSpeed;
+
+    if ( factor != 1.0 && factor > 0.0 ) {
+        eye *= factor;
+    }
+
+    if ( staticMoving ) {
+        zoomStart = zoomEnd;
+    } else {
+        zoomStart.setY( zoomStart.y() + (zoomEnd.y() - zoomStart.y()) * dynamicDampingFactor );
+    }
+}
+
+void ApplicationWindow::rotateCamera()
+{
+    QVector3D axis;
+    QQuaternion quaternion;
+    QVector3D eyeDirection;
+    QVector3D objectUpDirection;
+    QVector3D objectSidewaysDirection;
+    QVector3D moveDirection;
+    double angle;
+
+    moveDirection.setX(moveCurr.x() - movePrev.x());
+    moveDirection.setY(moveCurr.y() - movePrev.y());
+    moveDirection.setZ(0);
+
+    angle = moveDirection.length();
+
+    //if (angle > 0.0) {
+
+        eye = cameraPosition - target;
+
+        eyeDirection = eye;
+        eyeDirection.normalize();
+
+        objectUpDirection = cameraUp;
+        objectUpDirection.normalize();
+
+        objectSidewaysDirection = QVector3D::crossProduct(objectUpDirection, eyeDirection);
+        objectSidewaysDirection.normalize();
+
+        objectUpDirection.normalize();
+        objectUpDirection *= (moveCurr.y() - movePrev.y());
+
+        objectSidewaysDirection.normalize();
+        objectSidewaysDirection *= (moveCurr.x() - movePrev.x());
+
+        objectUpDirection += objectSidewaysDirection;
+        moveDirection = objectUpDirection;
+
+        axis = QVector3D::crossProduct(moveDirection, eye);
+        axis.normalize();
+
+        angle *= rotateSpeed;
+
+        quaternion = QQuaternion::fromAxisAndAngle(axis, angle);
+
+        eye = quaternion * eye;
+        cameraUp = quaternion * cameraUp;
+
+        lastAxis = axis;
+        lastAngle = angle;
+    //}
+
+    movePrev = moveCurr;
+}
+
+void ApplicationWindow::panCamera()
+{
+    QVector2D mouseChange;
+    QVector3D objectUp;
+    QVector3D pan;
+
+    mouseChange = panEnd;
+    mouseChange -= panStart;
+
+    if (mouseChange.lengthSquared() > 0.0) {
+
+        mouseChange *= (eye.length() * panSpeed);
+
+        pan = eye;
+        pan = QVector3D::crossProduct(pan, cameraUp);
+        pan.normalize();
+        pan *= mouseChange.x();
+
+        objectUp = cameraUp;
+        objectUp.normalize();
+        objectUp *= mouseChange.y();
+        pan += objectUp;
+
+        cameraPosition += pan;
+        target += pan;
+
+        if (staticMoving) {
+            panStart = panEnd;
+        } else {
+//            _panStart.add( mouseChange.subVectors( _panEnd, _panStart ).multiplyScalar( _this.dynamicDampingFactor ) );
+        }
+    }
+}
+
+ApplicationWindow::State
+ApplicationWindow::mouseButtonToState(Qt::MouseButton button) const
+{
+    switch(button) {
+    case Qt::LeftButton:
+        return State::ROTATE;
+    case Qt::MiddleButton:
+        return State::ZOOM;
+    case Qt::RightButton:
+        return State::PAN;
+    default:
+        return State::NONE;
+    }
+}
+
+QVector2D ApplicationWindow::getMouseOnCircle(int pageX, int pageY) const
+{
+    QVector2D vector;
+    vector.setX( ( pageX - this->width() * 0.5 ) / ( this->width() * 0.5 ) );
+    vector.setY( ( this->height() + 2 * ( -pageY ) ) / double(this->width()) );
+    return vector;
+}
+
+QVector2D ApplicationWindow::getMouseOnScreen(int pageX, int pageY) const
+{
+    QVector2D vector;
+    vector.setX( pageX / double(this->width()) );
+    vector.setY( pageY / double(this->height()) );
+    return vector;
+}
+
 void ApplicationWindow::paintGL()
 {
+    eye = cameraPosition - target;
+
+    rotateCamera();
+    zoomCamera();
+    panCamera();
+
+    cameraPosition = target + eye;
+
+    m_viewMatrix.setToIdentity();
+    m_viewMatrix.lookAt(cameraPosition, target, cameraUp);
+
+    //************************************************
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
