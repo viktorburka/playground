@@ -24,3 +24,5 @@ This repository is created to experiment with different technologies I've been l
 <img src="https://github.com/viktorburka/playground/blob/master/ticktactoe-angular/doc/readme-md/tictactoe-angular.png" width="300" height="300">
 
 * [tictacserver](https://github.com/viktorburka/playground/tree/master/tictacserver) is a very besic implementation of what is going to be TicTacToe multiplayer server. It only has some setup code and is written with [Spring](https://spring.io/) framework and Java. Currently only Spring XML setup is done as well as few beans and dependency injection
+
+* [wt-wayland-backend](https://github.com/viktorburka/playground/tree/master/wt-wayland-backend) is implementation of rendering with [Wayland](https://wayland.freedesktop.org/) display server. It contains the basic wiring and setup of callback functions to draw into the Wayland shared memory buffers. This implementation will be moved to [Window Toolkit](https://github.com/viktorburka/window-toolkit) project as Wayland backend at some point
