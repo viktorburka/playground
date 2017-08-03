@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainForm.ui.qml</file>
+        <file>minesweeper.js</file>
+        <file>images/bomb_image.png</file>
+        <file>images/closed_button.png</file>
+        <file>images/opened_button.png</file>
+    </qresource>
+</RCC>

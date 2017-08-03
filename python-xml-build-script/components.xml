@@ -1,0 +1,34 @@
+<components>
+<prefix>$/Root/MainBranch</prefix>
+<component name="WebsocketFramework" enabled="yes">
+    <component_path>Core/WebsocketFramework</component_path>
+    <component_test_path>Core/common/Tests/WebsocketFrameworkTests</component_test_path>
+    <component_build_cmd>make</component_build_cmd>
+    <component_test_build_cmd>make</component_test_build_cmd>
+    <component_test_binary>WebsocketFrameworkTest</component_test_binary>
+</component>
+<component name="DataServer" enabled="yes">
+    <component_path>Core/DataServer</component_path>
+    <component_test_path>Core/common/Tests/DataServerTests</component_test_path>
+    <component_build_cmd></component_build_cmd>
+    <component_test_build_cmd>make</component_test_build_cmd>
+    <component_test_binary>DataServerTest</component_test_binary>
+    <dependencies>
+        <dependency seq="1">{Core/common/WebsocketFramework|make}</dependency>
+        <dependency seq="2">{Core/common/Utility|make}</dependency>
+        <dependency seq="3">{Core/common/DataLayer|make}</dependency>
+    </dependencies>
+</component>
+<component name="View" enabled="no">
+    <component_path>Core/View</component_path>
+    <component_test_path>Core/common/Tests/ViewTests</component_test_path>
+    <component_build_cmd></component_build_cmd>
+    <component_test_build_cmd>.\build.bat</component_test_build_cmd>
+    <component_test_binary>ViewTest</component_test_binary>
+    <dependencies>
+        <dependency seq="1">{Core/common/Tests/SocketLayerTests|make}</dependency>
+        <dependency seq="2">{Core/common/Tests/DataLayerTests|make}</dependency>
+        <dependency seq="3">{Core/common/Tests/ModemTests|make}</dependency>
+    </dependencies>
+</component>
+</components>
