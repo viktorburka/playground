@@ -30,7 +30,7 @@ export class GameButton {
         console.log("Position: " + this.position);
         this.gameLogic.onLastPositionChanged(this.position);
         if (this.gameLogic.state == GameResult.Continue) {
-            this.http.get('http://localhost:8080/TicTacServer-1.0/services/Rest/products')
+            this.http.post('/TicTacServer-1.0/services/Rest/products', '{}')
                      .map(res => res.json())
                      .subscribe(d => { console.log("command: " + d.command + ", parameter: " + d.commandParameter); });
         }

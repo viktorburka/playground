@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.inject.Inject;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,6 +38,14 @@ public class RestServletContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters)
     {
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(
+                Charset.forName("UTF-8"));
+        stringConverter.setSupportedMediaTypes(Arrays.asList(
+                MediaType.TEXT_PLAIN,
+                MediaType.TEXT_HTML,
+                MediaType.APPLICATION_JSON));
+        converters.add(stringConverter);
+
         MappingJackson2HttpMessageConverter jsonConverter =
                 new MappingJackson2HttpMessageConverter();
         jsonConverter.setSupportedMediaTypes(Arrays.asList(

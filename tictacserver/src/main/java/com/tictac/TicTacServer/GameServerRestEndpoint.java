@@ -1,5 +1,6 @@
 package com.tictac.TicTacServer;
 
+import com.tictac.TicTacServer.config.GameLogic;
 import com.tictac.TicTacServer.config.annotation.RestEndpoint;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
 
 @RestEndpoint
 public class GameServerRestEndpoint {
+
+    GameLogic gameLogic = new GameLogic();
 
     @RequestMapping(value = "account", method = RequestMethod.OPTIONS)
     public ResponseEntity<Void> discover()
@@ -30,7 +34,29 @@ public class GameServerRestEndpoint {
     {
         //List<PlayerAction> list = new LinkedList<PlayerAction>();
         //return list;
-        System.out.println("In read !");
+//        System.out.println("In read !");
         return (new PlayerAction("click", "1,1"));
+    }
+
+    @RequestMapping(value = "gamestatus", method = RequestMethod.GET, produces="application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public String gameStatus()
+    {
+//        System.out.println("In gameStatus !");
+        String json = String.format("{\"status\": \"%s\"}", gameLogic.getStatus().name());
+        return json;
+    }
+
+    @RequestMapping(value = "join", method = RequestMethod.GET)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public String joinGame()
+    {
+        System.out.println("In joinGame !");
+        System.out.println("In joinGame ! Game status: " + gameLogic.getStatus().name());
+        gameLogic.joinGame();
+        System.out.println("In joinGame ! After join game status: " + gameLogic.getStatus().name());
+        return "{}";
     }
 }

@@ -1,8 +1,7 @@
 package com.tictac.TicTacServer;
 
 public class PlayerAction {
-    //private String action = new String("{\"command\": \"click\", \"pos\": \"1,1\"}");
-    //private String action = new String("action");
+
     private String command;
     private String commandParameter;
 
