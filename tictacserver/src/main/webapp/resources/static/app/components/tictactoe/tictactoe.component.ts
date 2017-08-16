@@ -14,6 +14,6 @@ export class TicTacToeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.router.navigate(['']);
+        this.router.navigate(['game']);
     }
 }

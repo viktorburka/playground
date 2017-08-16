@@ -1,4 +1,4 @@
-package com.tictac.TicTacServer;
+package com.tictac.TicTacServer.game.msgobjects;
 
 public class PlayerAction {
 

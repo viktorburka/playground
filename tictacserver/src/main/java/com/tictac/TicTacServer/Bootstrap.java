@@ -1,6 +1,10 @@
-package com.tictac.TicTacServer.config;
+package com.tictac.TicTacServer;
 
+import com.tictac.TicTacServer.config.HomePageContextConfiguration;
+import com.tictac.TicTacServer.config.RestServletContextConfiguration;
+import com.tictac.TicTacServer.config.RootContextConfiguration;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -12,9 +16,13 @@ public class Bootstrap implements WebApplicationInitializer {
 
     public void onStartup(ServletContext container) throws ServletException
     {
-        //container.getServletRegistration("default").addMapping("/resource/*");
-
         ServletRegistration.Dynamic dispatcher;
+
+        // root context
+        AnnotationConfigWebApplicationContext rootContext =
+                new AnnotationConfigWebApplicationContext();
+        rootContext.register(RootContextConfiguration.class);
+        container.addListener(new ContextLoaderListener(rootContext));
 
         AnnotationConfigWebApplicationContext homePageContext =
                 new AnnotationConfigWebApplicationContext();
@@ -24,6 +32,7 @@ public class Bootstrap implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
 
+        // REST context
         AnnotationConfigWebApplicationContext restContext =
                 new AnnotationConfigWebApplicationContext();
         restContext.register(RestServletContextConfiguration.class);

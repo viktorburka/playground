@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
+import {GameLogic} from '../../gamelogic';
 
 @Component({
     selector: 'loading-screen',
@@ -17,12 +18,12 @@ export class LoadingScreenComponent implements AfterViewInit {
     private sub: any;
 
     constructor(private http: Http,
-                private router: Router) {
+                private router: Router,
+                private gameLogic: GameLogic) {
     }
 
     ngAfterViewInit() {
         this.message = 'Loading game...';
-        console.log('Trying to start game');
         this.http.get('/TicTacServer-1.0/services/Rest/gamestatus')
                  .map(res => res.json())
                  .subscribe(d => { console.log("gamestatus: " + d.status);
@@ -37,14 +38,14 @@ export class LoadingScreenComponent implements AfterViewInit {
         else if (status == "Player2Required") {
             this.http.get('/TicTacServer-1.0/services/Rest/join')
                  .map(res => res.json())
-                 .subscribe(d => { this.router.navigate(['/game']); });
+                 .subscribe(d => { this.gameLogic.playerName = 'Player_2'; this.router.navigate(['/game']); });
         }
         else if (status == "Available") {
             console.log('Trying to join the game');
             this.http.get('/TicTacServer-1.0/services/Rest/join')
                  .map(res => res.json())
-                 .subscribe(d => { this.message = 'Waiting for the Player 2 to join...';
-                                   console.log('Starting timer 1000/5000');
+                 .subscribe(d => { this.gameLogic.playerName = 'Player_1';
+                                   this.message = 'Waiting for the Player 2 to join...';
                                    this.timer = Observable.timer(1000,5000);
                                    this.sub = this.timer.subscribe( t => { this.pollGameStatus(); });
                  });

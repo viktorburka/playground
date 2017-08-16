@@ -17,10 +17,14 @@ export class GameLogic {
     fieldMatrix: CellState[][];
     player: Player;
     state: GameResult;
+
+    playerName: String;
+    blocked: Boolean;
     
     private MaxSize: number;
 
     constructor() {
+        this.blocked = false;
         this.MaxSize = 4;
         this.player = Player.Player1;
         this.fieldMatrix = [];
@@ -107,14 +111,36 @@ export class GameLogic {
                 if (this.fieldMatrix[row][col] == CellState.Closed) {
                     this.fieldMatrix[row][col] = (this.player == Player.Player1 ? CellState.Opened_X
                                                                                 : CellState.Opened_O);
-                    //console.log("Now fieldMatrix["+row+"]["+col+"]: " +  this.fieldMatrix[row][col]);
                     this.checkGame();
                 }
             }
         }
     }
 
+    move(position: String) {
+        var posList: Array<String> = position.split(',');
+        if (posList.length != 2) {
+            console.log("Wrong position value: " + position + "!");
+        } else {
+            var row: number = Number(posList[0]);
+            var col: number = Number(posList[1]);
+            if ((row >= 0 && row < this.MaxSize) && 
+                (col >= 0 && col < this.MaxSize)) {
+                if (this.fieldMatrix[row][col] == CellState.Closed) {
+                    this.fieldMatrix[row][col] = (this.playerName == "Player_1" ? CellState.Opened_X
+                                                                                : CellState.Opened_O);
+                    //this.checkGame();
+                }
+            }
+        }
+    }
+
     buttonColor(position: string): string {
+
+        if (this.blocked) {
+            return "url('resources/gray.png')";
+        }
+
         var row: number = Number(position.charAt(0));
         var col: number = Number(position.charAt(1));
         var state: CellState  = this.fieldMatrix[row][col];
