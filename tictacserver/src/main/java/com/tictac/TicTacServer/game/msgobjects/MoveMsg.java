@@ -1,6 +1,6 @@
 package com.tictac.TicTacServer.game.msgobjects;
 
-public class Move {
+public class MoveMsg {
 
     private String player;
     private String pos;

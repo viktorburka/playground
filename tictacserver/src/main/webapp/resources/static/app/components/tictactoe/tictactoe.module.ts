@@ -8,6 +8,9 @@ import {GameLogic} from '../../gamelogic';
 import {HttpModule, Http} from '@angular/http';
 import {LoadingScreenComponent} from '../../components/loadingscreen/loadingscreen.component';
 import {routing} from '../../components/app.routing';
+import {LoginFormComponent} from '../../components/loginform/loginform.component';
+import {AuthComponent} from '../../components/auth/auth.component';
+import {CreateAccountComponent} from '../../components/createaccount/createaccount.component';
 
 @NgModule({
     imports: [BrowserModule,
@@ -16,7 +19,10 @@ import {routing} from '../../components/app.routing';
     declarations: [TicTacToeComponent,
                    GameButton,
                    FieldComponent,
-                   LoadingScreenComponent],
+                   LoadingScreenComponent,
+                   LoginFormComponent,
+                   AuthComponent,
+                   CreateAccountComponent],
     providers: [GameLogic,
                 {provide: LocationStrategy, useClass: HashLocationStrategy}],
     bootstrap: [TicTacToeComponent]

@@ -1,11 +1,11 @@
-package com.tictac.TicTacServer.game.msgobjects;
+package com.tictac.TicTacServer;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Users")
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
     private long id;
     private String firstName;

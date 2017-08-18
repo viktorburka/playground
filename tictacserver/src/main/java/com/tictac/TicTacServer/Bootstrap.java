@@ -24,6 +24,7 @@ public class Bootstrap implements WebApplicationInitializer {
         rootContext.register(RootContextConfiguration.class);
         container.addListener(new ContextLoaderListener(rootContext));
 
+        // static web context
         AnnotationConfigWebApplicationContext homePageContext =
                 new AnnotationConfigWebApplicationContext();
         homePageContext.register(HomePageContextConfiguration.class);
@@ -37,10 +38,7 @@ public class Bootstrap implements WebApplicationInitializer {
                 new AnnotationConfigWebApplicationContext();
         restContext.register(RestServletContextConfiguration.class);
 
-        DispatcherServlet servlet = new DispatcherServlet(restContext);
-        servlet.setDispatchOptionsRequest(true);
-
-        dispatcher = container.addServlet("springRestDispatcher", servlet);
+        dispatcher = container.addServlet("springRestDispatcher", new DispatcherServlet(restContext));
         dispatcher.setLoadOnStartup(2);
         dispatcher.addMapping("/services/Rest/*");
     }

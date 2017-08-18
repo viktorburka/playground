@@ -18,9 +18,9 @@ public class HomePageContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/node_modules/**")
-                .addResourceLocations("/resources/home/node_modules/");
+                .addResourceLocations("/resources/static/node_modules/");
         registry.addResourceHandler("/**")
-                .addResourceLocations("/resources/home/");
+                .addResourceLocations("/resources/static/");
     }
 
     @Override

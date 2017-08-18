@@ -1,5 +1,7 @@
 package com.tictac.TicTacServer.beans.common;
 
+import com.tictac.TicTacServer.Player;
+import com.tictac.TicTacServer.interfaces.GameRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -8,14 +10,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+//@Repository
+public class SqlJpaRepository implements GameRepository {
 
-@Repository
-public class GameRepository {
-
-    GameRepository() {
-        System.out.println("GameRepository constructor");
+    SqlJpaRepository() {
+        System.out.println("SqlJpaRepository constructor");
     }
-    
+
+    public Player login(String login, String password) {
+        System.out.println("SqlJpaRepository login");
+        return null;
+    }
 /*
     private EntityManagerFactory factory;
 
@@ -34,7 +39,7 @@ public class GameRepository {
     public boolean authenticate(String login, String password) {
         EntityManager manager = null;
         EntityTransaction transaction = null;
-        User user = null;
+        UserEntity user = null;
         try
         {
             manager = this.factory.createEntityManager();
@@ -42,8 +47,8 @@ public class GameRepository {
             transaction.begin();
 
             CriteriaBuilder builder = manager.getCriteriaBuilder();
-            CriteriaQuery<User> criteria = builder.createQuery(User.class);
-            Root<User> userRoot = criteria.from(User.class);
+            CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);
+            Root<UserEntity> userRoot = criteria.from(UserEntity.class);
             criteria.select(userRoot);
             criteria.where(builder.equal(userRoot.get("login"), login));
             user = manager.createQuery(criteria).getSingleResult();

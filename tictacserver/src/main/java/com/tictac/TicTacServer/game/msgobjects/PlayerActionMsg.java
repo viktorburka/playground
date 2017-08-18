@@ -1,11 +1,11 @@
 package com.tictac.TicTacServer.game.msgobjects;
 
-public class PlayerAction {
+public class PlayerActionMsg {
 
     private String command;
     private String commandParameter;
 
-    public PlayerAction(String command, String commandParameter) {
+    public PlayerActionMsg(String command, String commandParameter) {
         this.command = command;
         this.commandParameter = commandParameter;
     }
