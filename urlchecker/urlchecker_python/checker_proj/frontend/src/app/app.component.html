@@ -1,0 +1,47 @@
+<br>
+<button class="btn btn-default" (click)="getValues()">Refresh</button>
+<br><br>
+<div style="color:red;" [hidden]="isErroMsgHidden()"><h3>{{errMsg}}</h3></div>
+<div class="panel panel-primary">
+    <div class="panel-heading">URLs</div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Url</th>
+                <th>Frequency (sec)</th>
+                <th>Expected code</th> 
+                <th>Expected string</th>
+            </tr>
+            <tr *ngFor="let u of urls; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{u.url}}</td>
+                <td>{{u.freq}}</td>
+                <td>{{u.expStatus}}</td>
+                <td>{{u.expString}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br>
+<div class="panel panel-primary">
+    <div class="panel-heading">URL checks</div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Url</th>
+                <th>Time checked</th>
+                <th>Status code</th> 
+                <th>State</th>
+            </tr>
+            <tr *ngFor="let u of urlChecks; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{u.url}}</td>
+                <td>{{u.timeChecked}}</td>
+                <td>{{u.statusCode}}</td>
+                <td>{{u.state}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
